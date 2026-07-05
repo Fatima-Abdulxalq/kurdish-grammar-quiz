@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ڕاهێنانە کارلێکەرەکانی پەیڤی پرس — سۆرانی و بادینی</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#E7F0EA;
+    --paper:#FFFFFF;
+    --paper-warm:#FCFEFC;
+    --ink:#1E3A30;
+    --ink-soft:#557167;
+    --green:#0F6B4F;
+    --green-deep:#0A4A37;
+    --green-bright:#1F9D6B;
+    --gold:#F2A516;
+    --gold-soft:#FBE7BE;
+    --gold-line:#F6C760;
+    --coral:#E2574C;
+    --coral-soft:#FCE3DF;
+    --line:#D8E5DD;
+    --line-soft:#E9F1EC;
+    --ring:rgba(15,107,79,.30);
+    --shadow:0 10px 30px -12px rgba(10,74,55,.28);
+    --shadow-sm:0 4px 14px -8px rgba(10,74,55,.30);
+    --radius:18px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:'Vazirmatn','Noto Naskh Arabic','Segoe UI',Tahoma,sans-serif;
+    color:var(--ink);
+    background-color:var(--bg);
+    background-image:radial-gradient(rgba(15,107,79,.07) 1.1px, transparent 1.1px);
+    background-size:22px 22px;
+    line-height:1.85;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* ---------- App bar ---------- */
+  .appbar{
+    position:sticky; top:0; z-index:40;
+    background:linear-gradient(135deg,var(--green) 0%, var(--green-deep) 100%);
+    color:#fff;
+    box-shadow:0 8px 24px -10px rgba(10,74,55,.55);
+    border-bottom:3px solid var(--gold);
+    overflow:hidden;
+  }
+  .appbar::after{ /* faint sun rays in the corner */
+    content:""; position:absolute; inset:-60px auto auto -60px;
+    width:200px; height:200px; left:auto; right:-70px; top:-90px;
+    background:
+      conic-gradient(from 0deg, rgba(246,199,96,.0) 0deg, rgba(246,199,96,.0) 14deg, rgba(246,199,96,.22) 18deg, rgba(246,199,96,.0) 22deg);
+    border-radius:50%;
+    pointer-events:none;
+  }
+  .appbar-inner{max-width:920px; margin:0 auto; padding:14px 20px;}
+  .bar-top{display:flex; align-items:center; gap:14px; flex-wrap:wrap;}
+  .brand{display:flex; align-items:center; gap:12px; margin-inline-end:auto;}
+  .brand h1{font-size:1.32rem; font-weight:900; margin:0; letter-spacing:.2px;}
+  .brand p{margin:0; font-size:.82rem; opacity:.9; font-weight:400;}
+  .sun-badge{
+    width:44px;height:44px;border-radius:50%;
+    background:radial-gradient(circle at 50% 45%, #FFD969, var(--gold) 70%);
+    box-shadow:0 0 0 4px rgba(255,217,105,.20), 0 0 18px rgba(246,199,96,.5);
+    flex:none; position:relative;
+  }
+  .sun-badge::before{
+    content:""; position:absolute; inset:-7px;
+    background:conic-gradient(from 0deg,
+      var(--gold-line) 0 6%, transparent 6% 12.5%);
+    border-radius:50%; -webkit-mask:radial-gradient(transparent 56%, #000 57%); mask:radial-gradient(transparent 56%, #000 57%);
+    opacity:.9;
+  }
+  .score-chip{
+    display:flex; align-items:center; gap:8px;
+    background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.28);
+    padding:7px 13px; border-radius:999px; font-weight:700; font-size:.92rem;
+    white-space:nowrap;
+  }
+  .bar-actions{display:flex; gap:8px;}
+  .icon-btn{
+    background:rgba(255,255,255,.14); color:#fff; border:1px solid rgba(255,255,255,.28);
+    padding:7px 14px; border-radius:999px; font-family:inherit; font-size:.86rem; font-weight:600;
+    cursor:pointer; transition:background .15s, transform .1s;
+  }
+  .icon-btn:hover{background:rgba(255,255,255,.26)}
+  .icon-btn:active{transform:translateY(1px)}
+  /* sunrise progress */
+  .progress-wrap{margin-top:12px;}
+  .progress-track{
+    position:relative; height:16px; border-radius:999px;
+    background:linear-gradient(180deg,#0c3a2c,#0a4a37);
+    border:1px solid rgba(255,255,255,.18); overflow:visible;
+  }
+  .progress-fill{
+    position:absolute; top:0; right:0; bottom:0; width:0%;
+    background:linear-gradient(90deg,var(--gold) 0%, #FFD86B 60%, var(--green-bright) 100%);
+    border-radius:999px; transition:width .7s cubic-bezier(.22,1,.36,1);
+  }
+  .progress-sun{
+    position:absolute; top:50%; right:-2px; width:26px; height:26px; margin-top:-13px;
+    border-radius:50%;
+    background:radial-gradient(circle at 50% 45%, #FFE08A, var(--gold) 72%);
+    box-shadow:0 0 0 3px rgba(255,224,138,.35), 0 0 14px rgba(246,199,96,.8);
+    transition:right .7s cubic-bezier(.22,1,.36,1);
+  }
+  .progress-meta{display:flex; justify-content:space-between; font-size:.78rem; opacity:.92; margin-top:7px;}
+  /* ---------- Layout ---------- */
+  main{max-width:920px; margin:0 auto; padding:26px 18px 70px;}
+  .card{
+    background:var(--paper); border:1px solid var(--line);
+    border-radius:var(--radius); box-shadow:var(--shadow-sm);
+    padding:24px; margin-bottom:22px;
+    opacity:0; transform:translateY(10px); animation:rise .5s ease forwards;
+  }
+  @keyframes rise{to{opacity:1; transform:none;}}
+  .ex-head{display:flex; align-items:center; gap:14px; margin-bottom:4px;}
+  .num{
+    flex:none; width:42px; height:42px; border-radius:50%;
+    display:grid; place-items:center; font-weight:900; font-size:1.05rem;
+    color:var(--green-deep);
+    background:radial-gradient(circle at 50% 40%, #FFE7AE, var(--gold-line) 78%);
+    box-shadow:0 0 0 4px var(--gold-soft);
+  }
+  .ex-head h2{margin:0; font-size:1.18rem; font-weight:800; color:var(--green-deep);}
+  .ex-sub{margin:2px 0 18px; color:var(--ink-soft); font-size:.95rem;}
+  /* highlighter behind hero word */
+  .hl{
+    background:linear-gradient(transparent 58%, var(--gold-soft) 58%);
+    padding:0 4px; border-radius:3px; font-weight:800; color:var(--green-deep);
+  }
+  /* fill-in rows */
+  .qrow{display:flex; flex-wrap:wrap; align-items:center; gap:8px; font-size:1.12rem; padding:6px 0;}
+  .qrow .idx{color:var(--gold); font-weight:800; min-width:1.4em;}
+  .blank{
+    border:none; border-bottom:2.5px dashed var(--line); background:var(--line-soft);
+    text-align:center; font-family:inherit; font-size:1.05rem; color:var(--ink);
+    padding:5px 10px; width:7.5rem; border-radius:8px 8px 0 0; outline:none;
+    transition:border-color .15s, background .15s, box-shadow .15s;
+  }
+  .blank:focus{border-bottom-color:var(--green); background:#fff; box-shadow:0 0 0 4px var(--ring);}
+  .blank.ok{border-bottom-color:var(--green-bright); background:#EAF7F0; color:var(--green-deep); font-weight:700;}
+  .blank.no{border-bottom-color:var(--coral); background:var(--coral-soft);}
+  /* write rows (full input) */
+  .write{
+    width:100%; font-family:inherit; font-size:1.05rem; color:var(--ink);
+    border:1.5px solid var(--line); border-radius:12px; padding:11px 14px; outline:none; background:var(--paper-warm);
+    transition:border-color .15s, box-shadow .15s, background .15s;
+  }
+  .write:focus{border-color:var(--green); box-shadow:0 0 0 4px var(--ring); background:#fff;}
+  .write.ok{border-color:var(--green-bright); background:#EAF7F0;}
+  .write.near{border-color:var(--gold); background:#FFF6E2;}
+  .write.no{border-color:var(--coral); background:var(--coral-soft);}
+  .prompt{font-size:1.08rem; margin:0 0 8px;}
+  .underline{color:var(--coral); font-weight:800; border-bottom:2px solid var(--coral); padding-bottom:1px;}
+  .stack{display:flex; flex-direction:column; gap:18px;}
+  .reveal-line{font-size:.92rem; color:var(--green); margin-top:6px; display:none;}
+  .reveal-line.show{display:block;}
+  .reveal-line b{color:var(--green-deep);}
+  /* grid for placement / analysis */
+  .grid2{display:grid; grid-template-columns:repeat(2,1fr); gap:14px;}
+  .mini{border:1px solid var(--line); border-radius:14px; background:var(--paper-warm); padding:14px;}
+  .mini label{display:block; font-weight:800; color:var(--green-deep); margin-bottom:7px; font-size:1.05rem;}
+  .mini .write{font-size:1rem;}
+  /* analysis selects */
+  .arow{display:flex; align-items:center; gap:12px; padding:7px 0; flex-wrap:wrap;}
+  .arow .tok{min-width:96px; font-weight:800; color:var(--coral);}
+  select.pick{
+    font-family:inherit; font-size:.98rem; color:var(--ink); background:#fff;
+    border:1.5px solid var(--line); border-radius:10px; padding:9px 12px; outline:none; cursor:pointer;
+    transition:border-color .15s, box-shadow .15s, background .15s; max-width:100%;
+  }
+  select.pick:focus{border-color:var(--green); box-shadow:0 0 0 4px var(--ring);}
+  select.pick.ok{border-color:var(--green-bright); background:#EAF7F0;}
+  select.pick.no{border-color:var(--coral); background:var(--coral-soft);}
+  .analysis-sentence{font-weight:800; color:var(--green-deep); font-size:1.12rem; margin:0 0 14px;}
+  /* buttons */
+  .actions{display:flex; flex-wrap:wrap; gap:10px; margin-top:18px;}
+  .btn{
+    font-family:inherit; font-weight:700; font-size:.98rem; cursor:pointer;
+    border-radius:12px; padding:11px 20px; border:none; transition:transform .1s, box-shadow .15s, background .15s;
+  }
+  .btn:active{transform:translateY(1px)}
+  .btn-primary{background:var(--green); color:#fff; box-shadow:0 8px 18px -10px rgba(15,107,79,.7);}
+  .btn-primary:hover{background:var(--green-deep)}
+  .btn-ghost{background:var(--gold-soft); color:var(--green-deep);}
+  .btn-ghost:hover{background:var(--gold-line)}
+  .feedback{margin-top:14px; font-weight:700; min-height:1.4em; display:flex; align-items:center; gap:8px;}
+  .feedback.good{color:var(--green-bright)}
+  .feedback.warn{color:#C77F12}
+  .feedback.bad{color:var(--coral)}
+  /* shake / pop */
+  @keyframes shake{10%,90%{transform:translateX(-1px)}20%,80%{transform:translateX(2px)}30%,50%,70%{transform:translateX(-4px)}40%,60%{transform:translateX(4px)}}
+  .shake{animation:shake .4s}
+  @keyframes pop{0%{transform:scale(1)}45%{transform:scale(1.06)}100%{transform:scale(1)}}
+  .pop{animation:pop .35s ease}
+  /* reference table */
+  .ref-toggle{display:flex; gap:8px; margin-bottom:14px; flex-wrap:wrap;}
+  .chip{
+    font-family:inherit; font-weight:700; font-size:.9rem; cursor:pointer;
+    border:1.5px solid var(--line); background:#fff; color:var(--ink-soft);
+    border-radius:999px; padding:7px 16px; transition:all .15s;
+  }
+  .chip.active{background:var(--green); color:#fff; border-color:var(--green);}
+  table.ref{width:100%; border-collapse:collapse; font-size:1.02rem; overflow:hidden; border-radius:12px;}
+  table.ref th, table.ref td{padding:11px 12px; text-align:right; border-bottom:1px solid var(--line-soft);}
+  table.ref thead th{background:var(--green); color:#fff; font-weight:700;}
+  table.ref tbody tr:nth-child(even){background:var(--paper-warm);}
+  table.ref .en{color:var(--ink-soft); font-size:.86rem;}
+  table.ref td:nth-child(2){font-weight:700; color:var(--green-deep);}
+  table.ref td:nth-child(3){font-weight:700; color:#B8651C;}
+  .ref.dim-sorani td:nth-child(2), .ref.dim-sorani th:nth-child(2){opacity:.28;}
+  .ref.dim-badini  td:nth-child(3), .ref.dim-badini  th:nth-child(3){opacity:.28;}
+  /* matching */
+  .match-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; align-items:start;}
+  .match-col h3{font-size:.95rem; color:var(--ink-soft); font-weight:700; margin:0 0 10px; text-align:center;}
+  .match-item{
+    border:1.5px solid var(--line); background:var(--paper-warm); border-radius:12px;
+    padding:12px 14px; font-size:1.02rem; cursor:pointer; user-select:none;
+    transition:all .15s; margin-bottom:10px;
+  }
+  .match-item:hover{border-color:var(--green); background:#fff;}
+  .match-item.sel{border-color:var(--gold); background:#FFF6E2; box-shadow:0 0 0 3px var(--gold-soft);}
+  .match-item.done{border-color:var(--green-bright); background:#EAF7F0; color:var(--green-deep); font-weight:700; cursor:default; opacity:.95;}
+  .match-item.done::after{content:" ✓"; color:var(--green-bright);}
+  /* quiz */
+  .quiz-q{border:1px solid var(--line-soft); border-radius:14px; padding:16px; margin-bottom:14px; background:var(--paper-warm);}
+  .quiz-q .stem{font-size:1.1rem; font-weight:700; margin:0 0 12px; color:var(--green-deep);}
+  .quiz-q .stem .gap{color:var(--coral); letter-spacing:2px;}
+  .opts{display:flex; flex-wrap:wrap; gap:10px;}
+  .opt{
+    font-family:inherit; font-size:1.02rem; font-weight:700; cursor:pointer;
+    border:1.5px solid var(--line); background:#fff; color:var(--ink);
+    border-radius:999px; padding:9px 22px; transition:all .12s;
+  }
+  .opt:hover{border-color:var(--green); }
+  .opt.ok{background:#EAF7F0; border-color:var(--green-bright); color:var(--green-deep);}
+  .opt.no{background:var(--coral-soft); border-color:var(--coral); color:#9B2B22;}
+  .opt:disabled{cursor:default;}
+  /* accordions */
+  details.acc{border:1px solid var(--line); border-radius:14px; background:var(--paper); margin-bottom:14px; overflow:hidden;}
+  details.acc summary{
+    cursor:pointer; list-style:none; padding:16px 20px; font-weight:800; color:var(--green-deep);
+    display:flex; align-items:center; gap:10px; font-size:1.05rem;
+  }
+  details.acc summary::-webkit-details-marker{display:none;}
+  details.acc summary .tw{margin-inline-start:auto; transition:transform .2s; color:var(--gold);}
+  details.acc[open] summary .tw{transform:rotate(180deg);}
+  details.acc .body{padding:0 20px 18px; color:var(--ink); font-size:1rem;}
+  details.acc .body ul{margin:0; padding-inline-start:22px;}
+  details.acc .body li{margin:6px 0;}
+  .motivation{
+    text-align:center; background:linear-gradient(135deg,#FFF7E6,#FDEFD0);
+    border:1px solid var(--gold-line); border-radius:var(--radius); padding:28px 22px;
+    box-shadow:var(--shadow-sm); position:relative; overflow:hidden;
+  }
+  .motivation .sun-emoji{font-size:2.4rem;}
+  .motivation h3{margin:8px 0 6px; color:var(--green-deep); font-size:1.3rem;}
+  .motivation p{margin:0; color:#9A6A12; font-weight:600; font-size:1.06rem;}
+  .footnote{text-align:center; color:var(--ink-soft); font-size:.82rem; margin-top:22px;}
+  /* celebration banner */
+  #celebrate{
+    position:fixed; inset:auto 0 26px 0; margin:0 auto; width:max-content; max-width:90%;
+    background:var(--green-deep); color:#fff; padding:14px 26px; border-radius:999px;
+    box-shadow:0 16px 40px -12px rgba(0,0,0,.5); font-weight:800; z-index:60;
+    border:2px solid var(--gold); display:none; align-items:center; gap:10px;
+  }
+  #confetti{position:fixed; inset:0; pointer-events:none; z-index:55;}
+  @media (max-width:640px){
+    .grid2,.match-grid,.quiz-q .opts{grid-template-columns:1fr;}
+    .opts{flex-direction:column;}
+    .opt{text-align:center;}
+    .brand h1{font-size:1.1rem;}
+    .card{padding:18px;}
+    .match-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important; scroll-behavior:auto !important;}
+  }
+  @media print{
+    .appbar, .actions, #celebrate, #confetti, .ref-toggle{display:none !important;}
+    body{background:#fff;}
+    .card{box-shadow:none; break-inside:avoid;}
+    .reveal-line{display:block !important;}
+  }
+</style>
+</head>
+<body>
+<canvas id="confetti"></canvas>
+<div id="celebrate">🎉 ئافەرین! هەموو ڕاهێنانەکانت بە سەرکەوتوویی تەواوکرد ☀️</div>
+<!-- ===== App bar ===== -->
+<header class="appbar">
+  <div class="appbar-inner">
+    <div class="bar-top">
+      <div class="brand">
+        <div class="sun-badge" aria-hidden="true"></div>
+        <div>
+          <h1>ڕاهێنانە کارلێکەرەکانی پەیڤی پرس</h1>
+          <p>زمانی کوردی • سۆرانی و بادینی • وەڵامەکانت یەکسەر بپشکنە</p>
+        </div>
+      </div>
+      <div class="score-chip">☀️ <span id="scoreText">٠ / ٢٨ خاڵ</span></div>
+      <div class="bar-actions">
+        <button class="icon-btn" onclick="resetAll()">دووبارە دەستپێبکە</button>
+      </div>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-track">
+        <div class="progress-fill" id="progFill"></div>
+        <div class="progress-sun" id="progSun" aria-hidden="true"></div>
+      </div>
+      <div class="progress-meta">
+        <span>خۆرەکە تا کۆتایی بەرز بکەرەوە 🌅</span>
+        <span id="progPct">٠٪</span>
+      </div>
+    </div>
+  </div>
+</header>
+<main>
+  <!-- ===== Reference table ===== -->
+  <section class="card">
+    <div class="ex-head">
+      <span class="num">★</span>
+      <h2>خشتەی پەیڤەکانی پرس</h2>
+    </div>
+    <p class="ex-sub">پێش دەستپێکردن، پەیڤەکانی پرس بەیادبهێنەرەوە. دیالێکتێک هەڵبژێرە بۆ ئەوەی تەرکیزی لەسەر بکەیت.</p>
+    <div class="ref-toggle">
+      <button class="chip active" data-mode="both" onclick="setDialect('both', this)">هەردوو</button>
+      <button class="chip" data-mode="sorani" onclick="setDialect('sorani', this)">سۆرانی</button>
+      <button class="chip" data-mode="badini" onclick="setDialect('badini', this)">بادینی</button>
+    </div>
+    <div style="overflow-x:auto;">
+      <table class="ref" id="refTable">
+        <thead><tr><th>واتا</th><th>سۆرانی</th><th>بادینی</th></tr></thead>
+        <tbody>
+          <tr><td>چی <span class="en">(what)</span></td><td>چی</td><td>چ / چی</td></tr>
+          <tr><td>کێ <span class="en">(who)</span></td><td>کێ</td><td>کێ</td></tr>
+          <tr><td>کوێ <span class="en">(where)</span></td><td>لە کوێ</td><td>ل کیڤە / کیڤە</td></tr>
+          <tr><td>کەی <span class="en">(when)</span></td><td>کەی / کەنگێ</td><td>کەنگی</td></tr>
+          <tr><td>چۆن <span class="en">(how)</span></td><td>چۆن</td><td>چاوا / چەوا</td></tr>
+          <tr><td>بۆچی <span class="en">(why)</span></td><td>بۆچی</td><td>چما / بۆچی</td></tr>
+          <tr><td>چەند <span class="en">(how many)</span></td><td>چەند</td><td>چەند</td></tr>
+          <tr><td>کام <span class="en">(which)</span></td><td>کام</td><td>کیژان / کیژ</td></tr>
+          <tr><td>ئایا <span class="en">(yes/no)</span></td><td>ئایا</td><td>گەلۆ / ئەرێ</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <!-- ===== Exercise 1 ===== -->
+  <section class="card" id="ex1">
+    <div class="ex-head"><span class="num">١</span><h2>بۆشاییەکان پڕ بکەرەوە</h2></div>
+    <p class="ex-sub">هەر بۆشاییەک بە <span class="hl">پەیڤێکی پرس</span> پڕ بکەرەوە (سۆرانی یان بادینی).</p>
+    <div class="stack">
+      <div>
+        <div class="qrow"><span class="idx">١.</span><span>زمانی تۆ</span><input class="blank" id="b1"><span>یە؟</span></div>
+        <div class="reveal-line" id="r1">وەڵام: <b>چی</b> (سۆرانی) / <b>کیش</b> (بادینی)</div>
+      </div>
+      <div>
+        <div class="qrow"><span class="idx">٢.</span><span>گەنم</span><input class="blank" id="b2"><span>دهێتە چاندن؟</span></div>
+        <div class="reveal-line" id="r2">وەڵام: <b>کەنگی</b> / <b>چەوا</b></div>
+      </div>
+      <div>
+        <div class="qrow"><span class="idx">٣.</span><span>کاروان لەگەڵ</span><input class="blank" id="b3"><span>چوو بۆ سەیران؟</span></div>
+        <div class="reveal-line" id="r3">وەڵام: <b>کێ</b></div>
+      </div>
+      <div>
+        <div class="qrow"><span class="idx">٤.</span><input class="blank" id="b4"><span>ل کوردستانێ بەفر دبارێت؟</span></div>
+        <div class="reveal-line" id="r4">وەڵام: <b>کەنگی</b> / <b>چەوا</b></div>
+      </div>
+      <div>
+        <div class="qrow"><span class="idx">٥.</span><input class="blank" id="b5"><span>تۆ وانا خۆ نانڤیسی؟</span></div>
+        <div class="reveal-line" id="r5">وەڵام: <b>چما</b> (بادینی) / <b>بۆچی</b> (سۆرانی)</div>
+      </div>
+      <div>
+        <div class="qrow"><span class="idx">٦.</span><input class="blank" id="b6"><span>نەخوێندەواری لە کوردستاندا نامێنێت؟</span></div>
+        <div class="reveal-line" id="r6">وەڵام: <b>کەنگی</b> / <b>چۆن</b></div>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="btn btn-primary" onclick="checkEx1()">پشکنین</button>
+      <button class="btn btn-ghost" onclick="revealEx1()">وەڵامەکان پیشان بدە</button>
+    </div>
+    <div class="feedback" id="fb1"></div>
+  </section>
+  <!-- ===== Exercise 2 ===== -->
+  <section class="card" id="ex2">
+    <div class="ex-head"><span class="num">٢</span><h2>ڕستەکان بکە بە پرسیار</h2></div>
+    <p class="ex-sub">ئەو بەشەی بە <span class="underline">ڕەنگی سوور</span> هێڵی ژێردا کێشراوە، بیگۆڕە بۆ پەیڤێکی پرس و ڕستە پرسیارییەکە بنووسە.</p>
+    <div class="stack">
+      <div>
+        <p class="prompt">١. دار گوێز <span class="underline">لە کوردستاندا</span> دەڕوێت.</p>
+        <input class="write" id="w1" placeholder="ڕستە پرسیارییەکە لێرە بنووسە…">
+        <div class="reveal-line" id="wr1">نموونە: <b>دار گوێز لە کوێ دەڕوێت؟</b></div>
+      </div>
+      <div>
+        <p class="prompt">٢. ئارمسترۆنگ <span class="underline">یەکەم کەس</span> بوو گەیشتە سەر مانگ.</p>
+        <input class="write" id="w2" placeholder="ڕستە پرسیارییەکە لێرە بنووسە…">
+        <div class="reveal-line" id="wr2">نموونە: <b>کێ بوو گەیشتە سەر مانگ؟</b></div>
+      </div>
+      <div>
+        <p class="prompt">٣. ئەز <span class="underline">ب کەلەکێ</span> ژ ڕوباری دەرباز بووم.</p>
+        <input class="write" id="w3" placeholder="ڕستە پرسیارییەکە لێرە بنووسە…">
+        <div class="reveal-line" id="wr3">نموونە: <b>تۆ ب چی ژ ڕوباری دەرباز بووی؟</b> (یان: تە چەوا…)</div>
+      </div>
+      <div>
+        <p class="prompt">٤. گرانی یا باری <span class="underline">٢٠</span> کیلۆیە.</p>
+        <input class="write" id="w4" placeholder="ڕستە پرسیارییەکە لێرە بنووسە…">
+        <div class="reveal-line" id="wr4">نموونە: <b>گرانی یا باری چەند کیلۆیە؟</b></div>
+      </div>
+      <div>
+        <p class="prompt">٥. <span class="underline">ئەمەیان</span> باشترە.</p>
+        <input class="write" id="w5" placeholder="ڕستە پرسیارییەکە لێرە بنووسە…">
+        <div class="reveal-line" id="wr5">نموونە: <b>کامیان باشترە؟</b></div>
+      </div>
+      <div>
+        <p class="prompt">٦. نافێ تە <span class="underline">هشیارە</span>؟</p>
+        <input class="write" id="w6" placeholder="ڕستە پرسیارییەکە لێرە بنووسە…">
+        <div class="reveal-line" id="wr6">نموونە: <b>نافێ تە چییە؟</b></div>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="btn btn-primary" onclick="checkEx2()">پشکنین</button>
+      <button class="btn btn-ghost" onclick="revealEx2()">نموونەی وەڵامەکان</button>
+    </div>
+    <div class="feedback" id="fb2"></div>
+  </section>
+  <!-- ===== Exercise 3 ===== -->
+  <section class="card" id="ex3">
+    <div class="ex-head"><span class="num">٣</span><h2>پەیڤەکان لە ڕستەدا بەکاربهێنە</h2></div>
+    <p class="ex-sub">بۆ هەر پەیڤێک ڕستەیەکی بەسوود و واتادار بنووسە. (ئەمە بەشی نووسینی ئازادە — مامۆستا هەڵدەسەنگێنێت.)</p>
+    <div class="grid2">
+      <div class="mini">
+        <label>١. کام</label>
+        <input class="write" placeholder="ڕستەیەک بنووسە…">
+        <div class="reveal-line" id="e3r1">نموونە: <b>کام کتێبت دەوێت؟</b></div>
+      </div>
+      <div class="mini">
+        <label>٢. ئایا</label>
+        <input class="write" placeholder="ڕستەیەک بنووسە…">
+        <div class="reveal-line" id="e3r2">نموونە: <b>ئایا سبەی دێیت بۆ قوتابخانە؟</b></div>
+      </div>
+      <div class="mini">
+        <label>٣. چۆن</label>
+        <input class="write" placeholder="ڕستەیەک بنووسە…">
+        <div class="reveal-line" id="e3r3">نموونە: <b>چۆن کارەکەت ئەنجامدا؟</b></div>
+      </div>
+      <div class="mini">
+        <label>٤. چما</label>
+        <input class="write" placeholder="ڕستەیەک بنووسە…">
+        <div class="reveal-line" id="e3r4">نموونە: <b>چما تۆ نەهاتی بۆ یارییەکە؟</b></div>
+      </div>
+      <div class="mini">
+        <label>٥. چی</label>
+        <input class="write" placeholder="ڕستەیەک بنووسە…">
+        <div class="reveal-line" id="e3r5">نموونە: <b>چی لەناو جانتاکەتدا هەیە؟</b></div>
+      </div>
+      <div class="mini">
+        <label>٦. کەنگی</label>
+        <input class="write" placeholder="ڕستەیەک بنووسە…">
+        <div class="reveal-line" id="e3r6">نموونە: <b>کەنگی دەگەڕێیتەوە بۆ ماڵەوە؟</b></div>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="btn btn-ghost" onclick="revealEx3(this)">نموونەی وەڵامەکان پیشان بدە</button>
+    </div>
+  </section>
+  <!-- ===== Exercise 4 ===== -->
+  <section class="card" id="ex4">
+    <div class="ex-head"><span class="num">٤</span><h2>شیکردنەوەی ڕێزمانیی ڕستە</h2></div>
+    <p class="ex-sub">بۆ هەر وشەیەک بژاردەی ڕاست هەڵبژێرە، بەپێی شێوازی کتێبی ڕێزمان.</p>
+    <p class="analysis-sentence">جوتیار زەوی بە چی دەکێڵێت؟</p>
+    <div class="stack">
+      <div class="arow"><span class="tok">جوتیار:</span>
+        <select class="pick" id="a1">
+          <option value="">— هەڵبژێرە —</option>
+          <option value="1">ناوە، بکەرە.</option>
+          <option value="0">ناوە، بەرکارە.</option>
+          <option value="0">کاری ڕانەبردووە.</option>
+        </select>
+      </div>
+      <div class="arow"><span class="tok">زەوی:</span>
+        <select class="pick" id="a2">
+          <option value="">— هەڵبژێرە —</option>
+          <option value="0">ئامرازی پەیوەندییە.</option>
+          <option value="1">ناوە، بەرکاری ڕاستەوخۆیە.</option>
+          <option value="0">جێناوی لکاوە.</option>
+        </select>
+      </div>
+      <div class="arow"><span class="tok">بە:</span>
+        <select class="pick" id="a3">
+          <option value="">— هەڵبژێرە —</option>
+          <option value="1">ئامرازی پەیوەندییە.</option>
+          <option value="0">پەیڤی پرسە.</option>
+          <option value="0">بکەرە.</option>
+        </select>
+      </div>
+      <div class="arow"><span class="tok">چی:</span>
+        <select class="pick" id="a4">
+          <option value="">— هەڵبژێرە —</option>
+          <option value="0">جێناوی لکاوە.</option>
+          <option value="1">پەیڤی پرسە، تەواوکەری بە یاریدەی کارە.</option>
+          <option value="0">کاری تێپەڕە.</option>
+        </select>
+      </div>
+      <div class="arow"><span class="tok">دەکێڵێت:</span>
+        <select class="pick" id="a5">
+          <option value="">— هەڵبژێرە —</option>
+          <option value="1">کاری ڕانەبردووە، تێپەڕە.</option>
+          <option value="0">کاری ڕابردووە، تێنەپەڕە.</option>
+        </select>
+      </div>
+      <div class="arow"><span class="tok">ـێت (لکاو):</span>
+        <select class="pick" id="a6">
+          <option value="">— هەڵبژێرە —</option>
+          <option value="0">ئامرازی پەیوەندییە.</option>
+          <option value="1">جێناوی لکاوە بۆ کەسی سێیەمی تاک (بۆ بکەر دەگەڕێتەوە).</option>
+          <option value="0">بەرکاری ڕاستەوخۆیە.</option>
+        </select>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="btn btn-primary" onclick="checkEx4()">پشکنینی شیکردنەوە</button>
+    </div>
+    <div class="feedback" id="fb4"></div>
+  </section>
+  <!-- ===== Exercise 5: Matching ===== -->
+  <section class="card" id="ex5">
+    <div class="ex-head"><span class="num">٥</span><h2>یارییەکی بەستن: پرسیار لەگەڵ وەڵام</h2></div>
+    <p class="ex-sub">سەرەتا پرسیارێک هەڵبژێرە، پاشان وەڵامی گونجاوی بۆ هەڵبژێرە. جووتە دروستەکان <span style="color:var(--green-bright);font-weight:800">سەوز</span> دەبنەوە.</p>
+    <div class="match-grid">
+      <div class="match-col">
+        <h3>پرسیار</h3>
+        <div id="matchQ"></div>
+      </div>
+      <div class="match-col">
+        <h3>وەڵام</h3>
+        <div id="matchA"></div>
+      </div>
+    </div>
+    <div class="feedback" id="fb5"></div>
+  </section>
+  <!-- ===== Exercise 6: Quiz ===== -->
+  <section class="card" id="ex6">
+    <div class="ex-head"><span class="num">٦</span><h2>یارییەکی خێرا: کام پەیڤی پرس؟</h2></div>
+    <p class="ex-sub">بۆ هەر ڕستەیەک، پەیڤی پرسی گونجاو هەڵبژێرە. وەڵامەکەت یەکسەر دەپشکنرێت.</p>
+    <div id="quizBox"></div>
+    <div class="feedback" id="fb6"></div>
+  </section>
+  <!-- ===== Notes / Grammar / Bonus ===== -->
+  <details class="acc">
+    <summary>📚 تێگەیشتنی ڕێزمانی <span class="tw">▾</span></summary>
+    <div class="body">
+      <p>پەیڤی پرس ئەو وشانەن کە بۆ دروستکردنی پرسیار بەکاردێن. لە کوردیدا زۆرجار پەیڤی پرس لە هەمان شوێنی ئەو وشەیە دادەنرێت کە وەڵامەکەی دەداتەوە (پێچەوانەی ئینگلیزی کە دەچێتە سەرەتای ڕستە). نموونە: «تۆ لە کوێ دەژیت؟» لێرەدا «کوێ» لە جێی ناوی شوێن دێت.</p>
+      <ul>
+        <li><b>چەند</b> هەمیشە پێش ناوی تاک دێت: «چەند کتێب» نەک «چەند کتێبەکان».</li>
+        <li>بەستەری کۆتایی (ـە / یە) فەرامۆش مەکە: «ناوت چییە؟» نەک «ناوت چی؟».</li>
+        <li>جیاوازیی شێوەزار: چۆن/چاوا • بۆچی/چما • کەی/کەنگی • کام/کیژان.</li>
+      </ul>
+    </div>
+  </details>
+  <details class="acc">
+    <summary>🧑‍🏫 تێبینی بۆ مامۆستا <span class="tw">▾</span></summary>
+    <div class="body">
+      <ul>
+        <li>تێکەڵکردنی «کوێ» (شوێن) و «کەی» (کات) بەهۆی لێکچوونی دەنگەوە — هەڵەیەکی باوە.</li>
+        <li>لەبیرکردنی بەستەری کۆتایی لە پرسیاری «چی»دا.</li>
+        <li>تێکەڵکردنی سۆرانی و بادینی لە یەک ڕستەدا.</li>
+        <li>بەکارهێنانی «چەند» لەگەڵ ناوی کۆ.</li>
+        <li><b>ئامۆژگاری وانەوتنەوە:</b> ڕاهێنان بە دیالۆگی دووانە و یاری ڕۆڵگێڕان جێگیرکردنی فێربوون باشتر دەکات.</li>
+      </ul>
+    </div>
+  </details>
+  <details class="acc">
+    <summary>⭐ ئەرکی زیادە <span class="tw">▾</span></summary>
+    <div class="body">
+      <p>دیالۆگێکی کورت (٦ دێڕ) بنووسە کە تێیدا لانیکەم <b>٦ پەیڤی پرسی جیاواز</b> بەکاربێنیت — جارێک بە سۆرانی و جارێک بە بادینی. پاشان لەگەڵ هاوڕێیەکت یاری ڕۆڵگێڕانی پێ بکە.</p>
+    </div>
+  </details>
+  <div class="motivation">
+    <div class="sun-emoji">☀️</div>
+    <h3>ئافەرین، تۆ زمانی دایکی خۆت فێردەبیت!</h3>
+    <p>هەر پرسیارێک دەرگایەکە بۆ زانین. بەردەوام بە و خۆرەکەت بەرز بکەرەوە! 🌟</p>
+  </div>
+  <p class="footnote">دروستکراوە بۆ پۆلی زمانی کوردی • سۆرانی و بادینی</p>
+</main>
+<script>
+/* ---------- Arabic-Indic numeral helper ---------- */
+const AR = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+const toAr = n => String(n).replace(/\d/g, d => AR[+d]);
+/* ---------- Scoring / progress ---------- */
+const MAX = 28; // 6 + 6 + 6 + 5 + 5 (Ex3 = free writing, not scored)
+const exScore = {1:0, 2:0, 4:0, 5:0, 6:0};
+let celebrated = false;
+function totalScore(){ return Object.values(exScore).reduce((a,b)=>a+b,0); }
+function updateProgress(){
+  const pts = totalScore();
+  const pct = Math.round((pts/MAX)*100);
+  document.getElementById('progFill').style.width = pct + '%';
+  document.getElementById('progSun').style.right = 'calc(' + pct + '% - 14px)';
+  document.getElementById('progPct').textContent = toAr(pct) + '٪';
+  document.getElementById('scoreText').textContent = toAr(pts) + ' / ' + toAr(MAX) + ' خاڵ';
+  if(pts >= MAX && !celebrated){ celebrated = true; celebrate(); }
+}
+/* ---------- text normalisation for Kurdish ---------- */
+function norm(s){
+  return (s||'')
+    .replace(/[\u200c\u200d\u200e\u200f]/g,'')
+    .replace(/[؟?.!،,]/g,'')
+    .replace(/\s+/g,'')
+    .replace(/ي/g,'ی').replace(/ك/g,'ک').replace(/ﯼ|ى/g,'ی')
+    .replace(/ة/g,'ه').replace(/[أإآ]/g,'ا')
+    .trim();
+}
+/* ---------- feedback helper ---------- */
+function setFb(id, msg, kind){
+  const el = document.getElementById(id);
+  el.textContent = msg;
+  el.className = 'feedback ' + (kind||'');
+}
+function flash(el, ok){
+  el.classList.remove('shake','pop');
+  void el.offsetWidth;
+  el.classList.add(ok ? 'pop' : 'shake');
+}
+/* ====================================================
+   Exercise 1 — fill in the blanks
+==================================================== */
+const ex1Keys = {
+  b1:['چی','کیش','کێش'],
+  b2:['کەنگی','چەوا','چۆن'],
+  b3:['کێ'],
+  b4:['کەنگی','چەوا','چۆن'],
+  b5:['چما','بۆچی'],
+  b6:['کەنگی','چۆن']
+};
+function checkEx1(){
+  let ok = 0; const ids = Object.keys(ex1Keys);
+  ids.forEach(id=>{
+    const el = document.getElementById(id);
+    const v = norm(el.value);
+    const hit = ex1Keys[id].some(a => norm(a) === v) && v !== '';
+    el.classList.remove('ok','no');
+    el.classList.add(hit ? 'ok' : 'no');
+    flash(el, hit);
+    if(hit) ok++;
+  });
+  exScore[1] = ok;
+  const total = ids.length;
+  if(ok === total) setFb('fb1','✓ نایاب! هەموو ' + toAr(total) + ' وەڵام دروستن.','good');
+  else setFb('fb1', toAr(ok) + ' لە ' + toAr(total) + ' دروستە — دووبارە هەوڵبدە یان وەڵامەکان ببینە.', ok? 'warn':'bad');
+  updateProgress();
+}
+function revealEx1(){
+  for(let i=1;i<=6;i++) document.getElementById('r'+i).classList.add('show');
+}
+/* ====================================================
+   Exercise 2 — turn into questions (lenient)
+==================================================== */
+const ex2 = [
+  {id:'w1', full:'دار گوێز لە کوێ دەڕوێت؟', token:'کوێ'},
+  {id:'w2', full:'کێ بوو گەیشتە سەر مانگ؟', token:'کێ'},
+  {id:'w3', full:'تۆ ب چی ژ ڕوباری دەرباز بووی؟', token:'چی'},
+  {id:'w4', full:'گرانی یا باری چەند کیلۆیە؟', token:'چەند'},
+  {id:'w5', full:'کامیان باشترە؟', token:'کام'},
+  {id:'w6', full:'نافێ تە چییە؟', token:'چی'}
+];
+function checkEx2(){
+  let ok = 0;
+  ex2.forEach(q=>{
+    const el = document.getElementById(q.id);
+    const v = norm(el.value);
+    el.classList.remove('ok','near','no');
+    if(v === ''){ el.classList.add('no'); flash(el,false); return; }
+    const exact = v === norm(q.full);
+    const hasTok = v.indexOf(norm(q.token)) !== -1;
+    if(exact){ el.classList.add('ok'); ok++; flash(el,true); }
+    else if(hasTok){ el.classList.add('near'); ok++; flash(el,true); }  // accepted, minor differences
+    else { el.classList.add('no'); flash(el,false); }
+  });
+  exScore[2] = ok;
+  if(ok === ex2.length) setFb('fb2','✓ زۆر باش! پەیڤی پرس بەدروستی بەکارهێنرا.','good');
+  else setFb('fb2', toAr(ok) + ' لە ' + toAr(ex2.length) + ' — دڵنیابە لە پەیڤی پرس و نیشانەی پرسیار (؟).', ok? 'warn':'bad');
+  updateProgress();
+}
+function revealEx2(){ for(let i=1;i<=6;i++) document.getElementById('wr'+i).classList.add('show'); }
+/* ====================================================
+   Exercise 3 — free writing, reveal model only
+==================================================== */
+function revealEx3(btn){
+  for(let i=1;i<=6;i++) document.getElementById('e3r'+i).classList.add('show');
+  btn.disabled = true; btn.style.opacity = .6;
+}
+/* ====================================================
+   Exercise 4 — analysis (selects)
+==================================================== */
+function checkEx4(){
+  let ok = 0; const n = 6;
+  for(let i=1;i<=n;i++){
+    const el = document.getElementById('a'+i);
+    el.classList.remove('ok','no');
+    if(el.value === '1'){ el.classList.add('ok'); ok++; }
+    else { el.classList.add('no'); flash(el,false); }
+  }
+  exScore[4] = Math.min(ok, 6);
+  if(ok === n) setFb('fb4','✓ شیکردنەوەیەکی تەواو دروست! 📚','good');
+  else setFb('fb4', toAr(ok) + ' لە ' + toAr(n) + ' دروستە — ئەوانەی سوور کرانەوە چاکیان بکەرەوە.', ok? 'warn':'bad');
+  updateProgress();
+}
+/* ====================================================
+   Exercise 5 — matching
+==================================================== */
+const pairs = [
+  {q:'ناوت چییە؟',                 a:'ناوم ئارامە.'},
+  {q:'تۆ لە کوێ دەژیت؟',           a:'لە سلێمانی دەژیم.'},
+  {q:'تەمەنت چەند ساڵە؟',          a:'سێزدە ساڵە.'},
+  {q:'کەی دەگەڕێیتەوە بۆ ماڵەوە؟', a:'سبەی ئێوارە.'},
+  {q:'بۆچی دواکەوتیت؟',           a:'چونکە ئۆتۆمبێلەکە خراپ بوو.'}
+];
+let selQ = null, matched = 0;
+function shuffle(arr){ return arr.map(x=>[Math.random(),x]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]); }
+function buildMatch(){
+  selQ = null; matched = 0;
+  const qBox = document.getElementById('matchQ');
+  const aBox = document.getElementById('matchA');
+  qBox.innerHTML = ''; aBox.innerHTML = '';
+  pairs.forEach((p,i)=>{
+    const q = document.createElement('div');
+    q.className = 'match-item'; q.textContent = p.q; q.dataset.k = i;
+    q.onclick = ()=>selectQ(q);
+    qBox.appendChild(q);
+  });
+  shuffle(pairs.map((p,i)=>({k:i,a:p.a}))).forEach(item=>{
+    const a = document.createElement('div');
+    a.className = 'match-item'; a.textContent = item.a; a.dataset.k = item.k;
+    a.onclick = ()=>selectA(a);
+    aBox.appendChild(a);
+  });
+}
+function selectQ(el){
+  if(el.classList.contains('done')) return;
+  document.querySelectorAll('#matchQ .match-item').forEach(x=>x.classList.remove('sel'));
+  el.classList.add('sel'); selQ = el;
+}
+function selectA(el){
+  if(el.classList.contains('done') || !selQ) return;
+  if(el.dataset.k === selQ.dataset.k){
+    el.classList.add('done'); selQ.classList.add('done'); selQ.classList.remove('sel');
+    selQ = null; matched++;
+    exScore[5] = matched; updateProgress();
+    if(matched === pairs.length) setFb('fb5','✓ هەموو جووتەکان بەستران! ٥ لە ٥ ☀️','good');
+    else setFb('fb5', toAr(matched) + ' لە ' + toAr(pairs.length) + ' بەسترا.', 'warn');
+  } else {
+    flash(el,false); flash(selQ,false);
+    setFb('fb5','هەڵە بوو — دووبارە هەوڵبدە.','bad');
+  }
+}
+/* ====================================================
+   Exercise 6 — quick quiz
+==================================================== */
+const quiz = [
+  {pre:'تەمەنت ', post:' ساڵە؟', opts:['چەند','چی','کوێ'], correct:0},
+  {pre:'',        post:' پێنووسەکەی برد؟', opts:['کێ','چی','کەی'], correct:0},
+  {pre:'تۆ ',     post:' دەژیت؟', opts:['لە کوێ','کەی','چەند'], correct:0},
+  {pre:'',        post:' نەهاتیت بۆ قوتابخانە؟', opts:['بۆچی','چی','کام'], correct:0},
+  {pre:'',        post:' کتێبت دەوێت؟', opts:['کام','کوێ','کەی'], correct:0}
+];
+let quizDone = 0;
+function buildQuiz(){
+  quizDone = 0;
+  const box = document.getElementById('quizBox');
+  box.innerHTML = '';
+  quiz.forEach((q,qi)=>{
+    const wrap = document.createElement('div');
+    wrap.className = 'quiz-q';
+    const stem = document.createElement('p');
+    stem.className = 'stem';
+    stem.innerHTML = toAr(qi+1) + '. ' + q.pre + '<span class="gap">_____</span>' + q.post;
+    const opts = document.createElement('div');
+    opts.className = 'opts';
+    // present options shuffled but remember correct text
+    const correctText = q.opts[q.correct];
+    shuffle(q.opts.slice()).forEach(text=>{
+      const b = document.createElement('button');
+      b.className = 'opt'; b.textContent = text;
+      b.onclick = ()=>answerQuiz(b, opts, text === correctText, correctText);
+      opts.appendChild(b);
+    });
+    wrap.appendChild(stem); wrap.appendChild(opts);
+    box.appendChild(wrap);
+  });
+}
+function answerQuiz(btn, group, isCorrect, correctText){
+  if(group.dataset.locked) return;
+  group.dataset.locked = '1';
+  group.querySelectorAll('.opt').forEach(o=>{
+    o.disabled = true;
+    if(o.textContent === correctText) o.classList.add('ok');
+  });
+  if(!isCorrect){ btn.classList.add('no'); flash(btn,false); }
+  else { exScore[6] = (exScore[6]||0) + 1; }
+  quizDone++;
+  if(quizDone === quiz.length){
+    if(exScore[6] === quiz.length) setFb('fb6','✓ پەنج لە پەنج! نایاب 🎉','good');
+    else setFb('fb6','تەواوبوو — ' + toAr(exScore[6]) + ' لە ' + toAr(quiz.length) + ' دروست.', 'warn');
+  }
+  updateProgress();
+}
+/* ====================================================
+   Reference dialect toggle
+==================================================== */
+function setDialect(mode, btn){
+  document.querySelectorAll('.ref-toggle .chip').forEach(c=>c.classList.remove('active'));
+  btn.classList.add('active');
+  const t = document.getElementById('refTable');
+  t.classList.remove('dim-sorani','dim-badini');
+  if(mode === 'sorani') t.classList.add('dim-badini');
+  if(mode === 'badini') t.classList.add('dim-sorani');
+}
+/* ====================================================
+   Reset
+==================================================== */
+function resetAll(){
+  // inputs
+  document.querySelectorAll('input.blank, input.write').forEach(el=>{
+    el.value=''; el.classList.remove('ok','no','near');
+  });
+  document.querySelectorAll('select.pick').forEach(el=>{ el.value=''; el.classList.remove('ok','no'); });
+  document.querySelectorAll('.reveal-line').forEach(el=>el.classList.remove('show'));
+  ['fb1','fb2','fb4','fb5','fb6'].forEach(id=>{ const e=document.getElementById(id); e.textContent=''; e.className='feedback'; });
+  Object.keys(exScore).forEach(k=>exScore[k]=0);
+  celebrated = false;
+  document.getElementById('celebrate').style.display='none';
+  buildMatch(); buildQuiz(); updateProgress();
+  document.querySelectorAll('.actions .btn-ghost').forEach(b=>{ b.disabled=false; b.style.opacity=1; });
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+/* ====================================================
+   Celebration + lightweight confetti
+==================================================== */
+function celebrate(){
+  const banner = document.getElementById('celebrate');
+  banner.style.display = 'flex';
+  setTimeout(()=>{ banner.style.display='none'; }, 6000);
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  runConfetti();
+}
+function runConfetti(){
+  const cv = document.getElementById('confetti');
+  const ctx = cv.getContext('2d');
+  cv.width = innerWidth; cv.height = innerHeight;
+  const colors = ['#F2A516','#1F9D6B','#E2574C','#0F6B4F','#FFD86B'];
+  const N = 140;
+  const parts = Array.from({length:N}, ()=>({
+    x: Math.random()*cv.width,
+    y: -20 - Math.random()*cv.height*0.5,
+    r: 5 + Math.random()*7,
+    c: colors[(Math.random()*colors.length)|0],
+    vy: 2 + Math.random()*3.5,
+    vx: -1.5 + Math.random()*3,
+    rot: Math.random()*6.28,
+    vr: -0.2 + Math.random()*0.4
+  }));
+  let frames = 0;
+  (function tick(){
+    ctx.clearRect(0,0,cv.width,cv.height);
+    parts.forEach(p=>{
+      p.x += p.vx; p.y += p.vy; p.rot += p.vr;
+      ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot);
+      ctx.fillStyle = p.c;
+      ctx.fillRect(-p.r/2, -p.r/2, p.r, p.r*0.6);
+      ctx.restore();
+    });
+    frames++;
+    if(frames < 170) requestAnimationFrame(tick);
+    else ctx.clearRect(0,0,cv.width,cv.height);
+  })();
+}
+window.addEventListener('resize', ()=>{
+  const cv = document.getElementById('confetti');
+  cv.width = innerWidth; cv.height = innerHeight;
+});
+/* ---------- init ---------- */
+buildMatch();
+buildQuiz();
+updateProgress();
+</script>
+</body>
+</html>
