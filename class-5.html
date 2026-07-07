@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ڕاهێنانەکانی زمانی کوردی</title>
+<title>پۆلی پێنجەم (ڕاهێنانەکانی زمانی کوردی)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
@@ -47,17 +47,25 @@
     background:conic-gradient(from 0deg, rgba(246,199,96,.0) 0deg, rgba(246,199,96,.0) 14deg, rgba(246,199,96,.22) 18deg, rgba(246,199,96,.0) 22deg);
     border-radius:50%; pointer-events:none;
   }
-  .appbar-inner{max-width:920px; margin:0 auto; padding:22px 20px; position:relative;}
-  .brand{display:flex; align-items:center; gap:14px;}
-  .brand h1{font-size:1.5rem; font-weight:900; margin:0; letter-spacing:.2px;}
-  .brand p{margin:4px 0 0; font-size:.86rem; opacity:.9; font-weight:400;}
+  .appbar-inner{max-width:920px; margin:0 auto; padding:16px 20px; display:flex; align-items:center; gap:16px; flex-wrap:wrap; position:relative;}
+  .brand{display:flex; align-items:center; gap:14px; margin-inline-end:auto;}
+  .brand h1{font-size:1.25rem; font-weight:900; margin:0;}
   .sun-badge{
-    width:48px;height:48px;border-radius:50%;
+    width:40px;height:40px;border-radius:50%;
     background:radial-gradient(circle at 50% 45%, #FFD969, var(--gold) 70%);
     box-shadow:0 0 0 4px rgba(255,217,105,.20), 0 0 18px rgba(246,199,96,.5);
     flex:none;
   }
+  .icon-btn{
+    background:rgba(255,255,255,.14); color:#fff; border:1px solid rgba(255,255,255,.28);
+    padding:8px 16px; border-radius:999px; font-family:inherit; font-size:.86rem; font-weight:600;
+    text-decoration:none; transition:background .15s;
+  }
+  .icon-btn:hover{background:rgba(255,255,255,.26)}
   main{max-width:920px; margin:0 auto; padding:34px 18px 70px;}
+  .intro{text-align:center; margin-bottom:30px;}
+  .intro h2{color:var(--green-deep); font-size:1.35rem; margin:0 0 6px; font-weight:800;}
+  .intro p{color:var(--ink-soft); margin:0;}
   .grid{display:grid; grid-template-columns:repeat(2,1fr); gap:18px;}
   .nav-card{
     display:block; background:var(--paper); border:1px solid var(--line); border-radius:var(--radius);
@@ -71,10 +79,9 @@
     background:radial-gradient(circle at 50% 40%, #FFE7AE, var(--gold-line) 78%);
     box-shadow:0 0 0 4px var(--gold-soft);
   }
-  .nav-card h3{margin:0 0 6px; color:var(--green-deep); font-size:1.2rem; font-weight:800;}
-  .nav-card p{margin:0; color:var(--ink-soft); font-size:.92rem;}
-  .footnote{text-align:center; color:var(--ink-soft); font-size:.82rem; margin-top:34px;}
-  @media (max-width:640px){ .grid{grid-template-columns:1fr;} .brand h1{font-size:1.2rem;} }
+  .nav-card h3{margin:0 0 6px; color:var(--green-deep); font-size:1.15rem; font-weight:800;}
+  .nav-card p{margin:0; color:var(--ink-soft); font-size:.9rem;}
+  @media (max-width:640px){ .grid{grid-template-columns:1fr;} }
   @media (prefers-reduced-motion: reduce){ *{transition:none !important;} }
 </style>
 </head>
@@ -83,32 +90,27 @@
   <div class="appbar-inner">
     <div class="brand">
       <div class="sun-badge" aria-hidden="true"></div>
-      <div>
-        <h1>ڕاهێنانەکانی زمانی کوردی</h1>
-        <p>پۆلێک هەڵبژێرە بۆ دەستپێکردن</p>
-      </div>
+      <h1>پۆلی پێنجەم</h1>
     </div>
+    <a href="index.html" class="icon-btn">→ گەڕانەوە بۆ پۆلەکان</a>
   </div>
 </header>
 <main>
-  <div class="grid">
-    <!-- پۆلی یەکەم -->
-    <a href="class-1.html" class="nav-card">
-      <div class="nav-badge">١</div>
-      <h3>پۆلی یەکەم</h3>
-      <p>ڕستەسازی و پەیڤە پرسیارییەکان (سۆرانی و بادینی)</p>
-    </a>
-
-    <!-- پۆلی پێنجەم -->
-    <a href="class-5.html" class="nav-card">
-      <div class="nav-badge">٥</div>
-      <h3>پۆلی پێنجەم</h3>
-      <p>وانەکان بەم زووانە زیاددەکرێن</p>
-    </a>
-
-    <!-- بۆ زیادکردنی پۆلی نوێ: ئەم بلۆکە کۆپی بکە، لینک بۆ class-2.html بگۆڕە، ژمارە و ناونیشانەکەش بگۆڕە -->
+  <div class="intro">
+    <h2>وانەیەک هەڵبژێرە</h2>
+    <p>وانەکان بەم زووانە زیاددەکرێن</p>
   </div>
-  <p class="footnote">دروستکراوە بۆ پۆلی زمانی کوردی (سۆرانی و بادینی)</p>
+  <div class="grid">
+    <!-- وانەی ١ -->
+    <!-- بۆ زیادکردنی وانەی نوێ: بلۆکێکی وەک ئەمە زیاد بکە -->
+    <!--
+    <a href="lecture-file-name.html" class="nav-card">
+      <div class="nav-badge">١</div>
+      <h3>ناونیشانی وانە</h3>
+      <p>وەسفێکی کورت</p>
+    </a>
+    -->
+  </div>
 </main>
 </body>
 </html>
