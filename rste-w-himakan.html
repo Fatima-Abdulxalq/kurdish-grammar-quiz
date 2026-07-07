@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ڕستە و هێماکان (Sentences & Punctuation) - پۆلی پێنجەم</title>
+<title>ڕستە و هێماکان - پۆلی پێنجەم</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
@@ -34,8 +34,16 @@
   .brand{display:flex; align-items:center; gap:12px; margin-inline-end:auto;}
   .brand h1{font-size:1.32rem; font-weight:900; margin:0; letter-spacing:.2px;}
   .brand p{margin:0; font-size:.82rem; opacity:.9; font-weight:400;}
-  .sun-badge{ width:44px;height:44px;border-radius:50%; background:radial-gradient(circle at 50% 45%, #FFD969, var(--gold) 70%);
-    box-shadow:0 0 0 4px rgba(255,217,105,.20), 0 0 18px rgba(246,199,96,.5); flex:none; }
+  .sun-badge{ width:44px;height:44px;border-radius:50%; background:radial-gradient(circle at 50% 45%, #FFE8A3, #FFD969 45%, var(--gold) 75%);
+    box-shadow:0 0 0 4px rgba(255,217,105,.20), 0 0 18px rgba(246,199,96,.5); flex:none; position:relative;
+    animation:sun-glow 3.5s ease-in-out infinite; }
+  .sun-badge::before{ content:""; position:absolute; inset:-7px;
+    background:conic-gradient(from 0deg, var(--gold-line) 0 6%, transparent 6% 12.5%);
+    border-radius:50%; -webkit-mask:radial-gradient(transparent 56%, #000 57%); mask:radial-gradient(transparent 56%, #000 57%);
+    opacity:.85; animation:sun-spin 24s linear infinite; }
+  @keyframes sun-glow{ 0%,100%{ box-shadow:0 0 0 4px rgba(255,217,105,.20), 0 0 18px rgba(246,199,96,.5); }
+    50%{ box-shadow:0 0 0 6px rgba(255,217,105,.32), 0 0 26px rgba(246,199,96,.8); } }
+  @keyframes sun-spin{ from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
   .score-chip{ display:flex; align-items:center; gap:8px; background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.28);
     padding:7px 13px; border-radius:999px; font-weight:700; font-size:.92rem; white-space:nowrap; }
   .bar-actions{display:flex; gap:8px; flex-wrap:wrap;}
@@ -117,21 +125,21 @@
 </head>
 <body>
 <canvas id="confetti"></canvas>
-<div id="celebrate">🎉 ئافەرین! هەموو پرسیارەکانت ڕاست بوون (Excellent Job!) ☀️</div>
+<div id="celebrate">🎉 ئافەرین! هەموو پرسیارە نمرەدارەکانت ڕاستە ☀️</div>
 <header class="appbar">
   <div class="appbar-inner">
     <div class="bar-top">
       <div class="brand">
         <div class="sun-badge" aria-hidden="true"></div>
         <div>
-          <h1>ڕستە و هێماکان (Sentences & Punctuation)</h1>
-          <p>ڕێزمان (Grammar) • پۆلی پێنجەم (Grade 5)</p>
+          <h1>ڕستە و هێماکان</h1>
+          <p>ڕێزمان • پۆلی پێنجەم</p>
         </div>
       </div>
-      <div class="score-chip">☀️ <span id="scoreText">٠ / ١١ خاڵ (Points)</span></div>
+      <div class="score-chip">☀️ <span id="scoreText">٠ / ١١ خاڵ</span></div>
       <div class="bar-actions">
-        <a href="class-5.html" class="icon-btn">→ گەڕانەوە (Back to Lessons)</a>
-        <button class="icon-btn" onclick="resetAll()">دووبارە دەستپێبکە (Reset)</button>
+        <a href="class-5.html" class="icon-btn">→ گەڕانەوە بۆ وانەکان</a>
+        <button class="icon-btn" onclick="resetAll()">دووبارە دەستپێبکە</button>
       </div>
     </div>
     <div class="progress-wrap">
@@ -139,14 +147,14 @@
         <div class="progress-fill" id="progFill"></div>
         <div class="progress-sun" id="progSun" aria-hidden="true"></div>
       </div>
-      <div class="progress-meta"><span>خۆرەکە تا کۆتایی بەرز بکەرەوە (Progress) 🌅</span><span id="progPct">٠٪</span></div>
+      <div class="progress-meta"><span>خۆرەکە تا کۆتایی بەرز بکەرەوە 🌅</span><span id="progPct">٠٪</span></div>
     </div>
   </div>
 </header>
 <main>
   <section class="card">
-    <div class="ex-head"><span class="num">★</span><h2>ناساندنی ڕستە و هێماکان (Introduction)</h2></div>
-    <p>ڕستە <b>(Sentence)</b> چەند وشەیەکە واتایەکی تەواو دەبەخشن و لەکۆتاییدا بە پێی مەبەست هێمای <b>(Punctuation Mark)</b> بۆ دادەنرێ.</p>
+    <div class="ex-head"><span class="num">★</span><h2>ناساندنی ڕستە و هێماکان</h2></div>
+    <p>ڕستە چەند وشەیەکە واتایەکی تەواو دەبەخشن و لەکۆتاییدا بە پێی مەبەست هێمای بۆ دادەنرێ.</p>
     <ol style="margin:10px 0 0; padding-inline-start:22px; line-height:2;">
       <li>باران باری.</li>
       <li>ئایا هێمن ڕۆیشت؟</li>
@@ -156,54 +164,54 @@
   </section>
 
   <section class="card">
-    <div class="ex-head"><span class="num">★</span><h2>خاڵبەندی (Punctuation Rules)</h2></div>
+    <div class="ex-head"><span class="num">★</span><h2>خاڵبەندی</h2></div>
     <div class="grid2">
-      <div class="mini"><span class="mark-badge">.</span><b>ڕستەی هەواڵدەر (Full Stop)</b><br><span style="color:var(--ink-soft);">بۆ کۆتایی ڕستە: هەولێر پایتەختی کوردستانە.</span></div>
-      <div class="mini"><span class="mark-badge">،</span><b>جیاکردنەوەی وشە (Comma)</b><br><span style="color:var(--ink-soft);">بۆ پشوودان: خیراکە وەرە ژوورێ،</span></div>
-      <div class="mini"><span class="mark-badge">؟</span><b>ڕستەی پرسیاری (Question Mark)</b><br><span style="color:var(--ink-soft);">بۆ پرسیار: کەی منداڵەکە نوست؟</span></div>
-      <div class="mini"><span class="mark-badge">:</span><b>پێش گێڕانەوە (Colon)</b><br><span style="color:var(--ink-soft);">پێش ئاخاوتن: ڕاز گوتی: ڕەوا سێوەکەی خوارد.</span></div>
-      <div class="mini"><span class="mark-badge">!</span><b>سەرسوڕمان (Exclamation)</b><br><span style="color:var(--ink-soft);">بۆ هەستی دەروونی: ئای خوایە، لەو جوانییە!</span></div>
-      <div class="mini"><span class="mark-badge">( )</span><b>کەوانە (Parentheses)</b><br><span style="color:var(--ink-soft);">بۆ ناوی تایبەت یان ساڵ: عەزیز گەردی لە (١٩٤٨ز) لە دایکبووە.</span></div>
+      <div class="mini"><span class="mark-badge">.</span><b>بۆ کۆتاییپێهێنانی ڕستەی هەواڵدەر</b><br><span style="color:var(--ink-soft);">هەولێر پایتەختی کوردستانە.</span></div>
+      <div class="mini"><span class="mark-badge">،</span><b>بۆ جیاکردنەوەی وشە یان بەشی ڕستە</b><br><span style="color:var(--ink-soft);">خیراکە وەرە ژوورێ،</span></div>
+      <div class="mini"><span class="mark-badge">؟</span><b>لە کۆتایی ڕستەی پرسیاری</b><br><span style="color:var(--ink-soft);">کەی منداڵەکە نوست؟</span></div>
+      <div class="mini"><span class="mark-badge">:</span><b>پێش ئاخاوتنێک کە وەک خۆی دەگێڕدرێتەوە</b><br><span style="color:var(--ink-soft);">ڕاز گوتی: ڕەوا سێوەکەی خوارد.</span></div>
+      <div class="mini"><span class="mark-badge">!</span><b>بۆ سەرسوڕمان یان هەستێکی دەروونی</b><br><span style="color:var(--ink-soft);">ئای خوایە، لەو جوانییە!</span></div>
+      <div class="mini"><span class="mark-badge">( )</span><b>بۆ وشە، ساڵ یان ڕستەیەکی واتای تایبەت</b><br><span style="color:var(--ink-soft);">عەزیز عەبدوڵڵا ئەحمەد، کە نازناوی (عەزیز گەردی)یە لە (١٩٤٨ز) لە دایکبووە.</span></div>
     </div>
   </section>
 
-  <h2 class="section-title">چالاکی و ڕاهێنان (Exercises)</h2>
+  <h2 class="section-title">چالاکی و ڕاهێنان</h2>
 
   <section class="card" id="act3">
-    <div class="ex-head"><span class="num">٣</span><h2>نیشانە گونجاوەکان (. ، ؟ !) دادەنێم (Insert Punctuation)</h2></div>
+    <div class="ex-head"><span class="num">٣</span><h2>ئەم نیشانانە (. ، ؟ !) بۆ ئەم ڕستانە دادەنێم</h2></div>
     <div id="act3Box"></div>
   </section>
 
   <section class="card" id="act4">
-    <div class="ex-head"><span class="num">٤</span><h2>ڕستە دروستدەکەم و هێمای بۆ دادەنێم (Sentence Building)</h2></div>
-    <p class="ex-sub">پەیڤەکان بە ڕێزبەندی ڕاست دابنێ و هێمای گونجاو زیاد بکە.</p>
+    <div class="ex-head"><span class="num">٤</span><h2>ڕستە دروستدەکەم و هێمای بۆ دادەنێم</h2></div>
+    <p class="ex-sub">پەیڤەکان بخە شوێنی خۆیان و ڕستەیەکی تەواو دروستبکە، هێمای گونجاویش زیاد بکە.</p>
     <div class="stack">
-      <div><p class="prompt">١- هەیە، زەویم، زێڕو، تورەگەیەک، ipad_holder، پارچەیەک</p><input class="write" placeholder="ڕستەکە لێرە بنووسە..."></div>
+      <div><p class="prompt">١- هەیە، زەویم، زێڕو، تورەگەیەک، پارچەیەک</p><input class="write" placeholder="ڕستەکە لێرە بنووسە..."></div>
       <div><p class="prompt">٢- زەوی و، کامیان، کێ، زێڕ، دەزانی، بەنرخترە، لەنێوان</p><input class="write" placeholder="ڕستەکە لێرە بنووسە..."></div>
       <div><p class="prompt">٣- نیشتیمان، خۆشەیست و، ئای، چەند، بەنرخی</p><input class="write" placeholder="ڕستەکە لێرە بنووسە..."></div>
       <div><p class="prompt">٤- تورەگە، بۆ، مایەوە، برا، بچوکەکە، زێڕەکە</p><input class="write" placeholder="ڕستەکە لێرە بنووسە..."></div>
     </div>
-    <p class="ex-sub" style="margin-top:14px; margin-bottom:0;">تێبینی: ئەم بەشە نمرەی خۆکار نییە، مامۆستا هەڵیدەسەنگێنێت (Teacher-graded section).</p>
+    <p class="ex-sub" style="margin-top:14px; margin-bottom:0;">ئەم بەشە نمرەی خۆکار نییە، چونکە زیاتر لە ڕستەیەکی دروست دەکرێت، مامۆستا هەڵیدەسەنگێنێت.</p>
   </section>
 
   <section class="card" id="act5">
-    <div class="ex-head"><span class="num">٥</span><h2>بەیەک دەگەیەنم (Matching Activity)</h2></div>
-    <p class="ex-sub">بەشی یەکەم لە تاکی لای ڕاستەوە ببەستەوە بە بەشە تەواوکارییەکەی لە لای چەپ.</p>
+    <div class="ex-head"><span class="num">٥</span><h2>بەیەک دەگەیەنم</h2></div>
+    <p class="ex-sub">سەرەتا بەشی سەرەوەی ڕستەیەک هەڵبژێرە، پاشان بەشی دواوەی گونجاوی بۆ هەڵبژێرە.</p>
     <div class="match-grid">
-      <div class="match-col"><h3>بەشی یەکەم (Part A)</h3><div id="matchQ5"></div></div>
-      <div class="match-col"><h3>بەشی دووەم (Part B)</h3><div id="matchA5"></div></div>
+      <div class="match-col"><h3>ئ</h3><div id="matchQ5"></div></div>
+      <div class="match-col"><h3>ب</h3><div id="matchA5"></div></div>
     </div>
     <div class="feedback" id="fb5"></div>
   </section>
 
   <section class="card" id="act6">
-    <div class="ex-head"><span class="num">٦</span><h2>وەڵامی ڕاست هەڵدەبژێرم (Multiple Choice)</h2></div>
+    <div class="ex-head"><span class="num">٦</span><h2>وەڵامی ڕاست لەناو کەوانەکە هەڵدەبژێرم</h2></div>
     <div id="act6Box"></div>
   </section>
 
   <section class="card" id="act7">
-    <div class="ex-head"><span class="num">٧</span><h2>یاریی تۆڕە وشە (Word Puzzle)</h2></div>
-    <p class="ex-sub">وشەکان بدۆزەرەوە و لە شوێنی بەتاڵ بنووسە.</p>
+    <div class="ex-head"><span class="num">٧</span><h2>یاریی تۆڕە وشە</h2></div>
+    <p class="ex-sub">وشەکان لەناو خشتەکەدا بدۆزەرەوە و لەژێر ئاماژە گونجاوەکە بینووسە.</p>
     <table class="letter-grid">
       <tr><td>ن</td><td>ێ</td><td>ڕ</td><td>گ</td><td>ز</td></tr>
       <tr><td>ش</td><td>د</td><td>ۆ</td><td>ڕ</td><td>و</td></tr>
@@ -211,30 +219,30 @@
       <tr><td>خ</td><td>ڕ</td><td>ن</td><td>هـ</td><td>ب</td></tr>
     </table>
     <div class="grid2">
-      <div class="mini"><label>١. ناوی گوڵێکە (Flower)</label><input class="write" placeholder="وەڵام..."></div>
-      <div class="mini"><label>٢. بە واتای گوند (Village)</label><input class="write" placeholder="وەڵام..."></div>
-      <div class="mini"><label>٣. دژواتای کەم (Antonym of: Less)</label><input class="write" placeholder="وەڵام..."></div>
-      <div class="mini"><label>٤. هاوواتای گرانبەها (Synonym of: Valuable)</label><input class="write" placeholder="وەڵام..."></div>
-      <div class="mini"><label>٥. دژواتای دەرمان (Antonym of: Medicine)</label><input class="write" placeholder="وەڵام..."></div>
-      <div class="mini"><label>٦. هاوواتای داو (Synonym of: Trap/Thread)</label><input class="write" placeholder="وەڵام..."></div>
-      <div class="mini"><label>٧. ئەندامی لەشی مرۆڤ (Body Part)</label><input class="write" placeholder="وەڵام..."></div>
-      <div class="mini"><label>٨. پلەی گەرمی (Temperature)</label><input class="write" placeholder="وەڵام..."></div>
-      <div class="mini"><label>٩. بەرهەمی ماستە (Dairy Product)</label><input class="write" placeholder="وەڵام..."></div>
+      <div class="mini"><label>١. ناوی گوڵێکە</label><input class="write" placeholder="وەڵام..."></div>
+      <div class="mini"><label>٢. بە واتای (گوند)</label><input class="write" placeholder="وەڵام..."></div>
+      <div class="mini"><label>٣. دژواتای (کەم)</label><input class="write" placeholder="وەڵام..."></div>
+      <div class="mini"><label>٤. هاوواتای (گرانبەها)</label><input class="write" placeholder="وەڵام..."></div>
+      <div class="mini"><label>٥. دژواتای (دەرمان)</label><input class="write" placeholder="وەڵام..."></div>
+      <div class="mini"><label>٦. هاوواتای (داو)</label><input class="write" placeholder="وەڵام..."></div>
+      <div class="mini"><label>٧. ئەندامی لەشی مرۆڤ</label><input class="write" placeholder="وەڵام..."></div>
+      <div class="mini"><label>٨. پلەی گەرمی</label><input class="write" placeholder="وەڵام..."></div>
+      <div class="mini"><label>٩. بەرهەمی ماستە</label><input class="write" placeholder="وەڵام..."></div>
     </div>
-    <p class="ex-sub" style="margin-top:14px; margin-bottom:0;">تێبینی: ئەم بەشە لەلایەن مامۆستاوە پشکنینی بۆ دەکرێت (To be checked with teacher).</p>
+    <p class="ex-sub" style="margin-top:14px; margin-bottom:0;">ئەم بەشیش نمرەی خۆکار نییە، مامۆستا لەگەڵ خشتەکە پشکنینی دەکات.</p>
   </section>
 
   <section class="card" id="act8">
-    <div class="ex-head"><span class="num">٨</span><h2>خاڵبەندی بۆ ئەم ڕستانە دادەنێم (Add Punctuation)</h2></div>
+    <div class="ex-head"><span class="num">٨</span><h2>خاڵبەندی بۆ ئەمانەی خوارەوە دادەنێم</h2></div>
     <div class="stack">
       <div><p class="prompt">١- کتێبی شەڕەفنامە کە شەرەف خانی بەدلیسی نووسیویەتی</p><input class="write" placeholder="ڕستەکە بە هێمای گونجاو بنووسەوە..."></div>
       <div><p class="prompt">٢- مامۆستا گوتی قوتابینە وانەکانتان بخوێنن</p><input class="write" placeholder="ڕستەکە بە هێمای گونجاو بنووسەوە..."></div>
       <div><p class="prompt">٣- له چ ساڵێک پیرەمێرد لە دایکبووە</p><input class="write" placeholder="ڕستەکە بە هێمای گونجاو بنووسەوە..."></div>
     </div>
-    <p class="ex-sub" style="margin-top:14px; margin-bottom:0;">تێبینی: ئەم بەشە نمرەی خۆکار نییە (Teacher-graded section).</p>
+    <p class="ex-sub" style="margin-top:14px; margin-bottom:0;">ئەم بەشیش نمرەی خۆکار نییە، مامۆستا هەڵیدەسەنگێنێت.</p>
   </section>
 
-  <p class="footnote">پۆلی پێنجەم • ڕێزمان (Grade 5 Grammar Lesson)</p>
+  <p class="footnote">دروستکراوە بۆ پۆلی پێنجەم • ڕێزمان</p>
 </main>
 <script>
 const AR = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
@@ -251,7 +259,7 @@ function updateProgress(){
   document.getElementById('progFill').style.width = pct+'%';
   document.getElementById('progSun').style.right = 'calc('+pct+'% - 14px)';
   document.getElementById('progPct').textContent = toAr(pct)+'٪';
-  document.getElementById('scoreText').textContent = toAr(pts)+' / '+toAr(MAX)+' خاڵ (Points)';
+  document.getElementById('scoreText').textContent = toAr(pts)+' / '+toAr(MAX)+' خاڵ';
   if(pts>=MAX && !celebrated){ celebrated=true; celebrate(); }
 }
 
@@ -328,7 +336,7 @@ function selectA5(el){
   if(el.dataset.k===selQ5.dataset.k){
     el.classList.add('done'); selQ5.classList.add('done'); selQ5.classList.remove('sel');
     selQ5=null; matched5++; score5=matched5; updateProgress();
-    if(matched5===pairs5.length) setFb('fb5','✓ هەموو جووتەکان بەستران! (All matched!)','good');
+    if(matched5===pairs5.length) setFb('fb5','✓ هەموو جووتەکان بەستران!','good');
   } else { flash(el,false); flash(selQ5,false); }
 }
 
@@ -360,7 +368,7 @@ function buildAct6(){
     if(!q.graded){
       const note = document.createElement('p');
       note.className='ex-sub'; note.style.margin='10px 0 0';
-      note.textContent='ئەم پرسیارە بۆ گفتوگۆیە لەگەڵ مامۆستایە، نمرەی نییە (Discussion question).';
+      note.textContent='ئەم پرسیارە بۆ گفتوگۆیە لەگەڵ مامۆستایە، نمرەی نییە.';
       wrap.appendChild(note);
     }
     box.appendChild(wrap);
