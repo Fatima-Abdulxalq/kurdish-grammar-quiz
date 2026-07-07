@@ -153,7 +153,7 @@ main{max-width:920px; margin:0 auto; padding:30px 18px 70px;}
 .intro{text-align:center; margin-bottom:30px;}
 .intro h2{color:var(--green-deep); font-size:1.35rem; margin:0 0 6px; font-weight:800;}
 .intro p{color:var(--ink-soft); margin:0;}
-.grid{display:grid; grid-template-columns:repeat(2,1fr); gap:18px;}
+.grid{display:grid; grid-template-columns:repeat(2,1fr); gap:18px; margin-bottom:28px;}
 .nav-card{
   display:block; background:var(--paper); border:1px solid var(--line); border-radius:var(--radius);
   box-shadow:var(--shadow-sm); padding:24px; text-decoration:none; color:inherit;
@@ -177,6 +177,7 @@ main{max-width:920px; margin:0 auto; padding:30px 18px 70px;}
 .card.analogy-card{border-right:5px solid var(--gold);}
 .card.analogy-card p{font-size:1.05rem;}
 .card.analogy-card p:last-child{margin-bottom:0;}
+.callout{background:var(--line-soft); border-right:4px solid var(--green); padding:14px 16px; border-radius:10px; margin:14px 0 18px;}
 .en{color:var(--ink-soft); font-weight:400;}
 
 /* ---------- Reading / story pages ---------- */
@@ -269,6 +270,7 @@ select.pick.no{border-color:var(--coral); background:var(--coral-soft);}
 
 /* ---------- Buttons ---------- */
 .actions{display:flex; flex-wrap:wrap; gap:10px; margin-top:18px;}
+.actions.center{justify-content:center;}
 .btn{
   font-family:inherit; font-weight:700; font-size:.98rem; cursor:pointer;
   border-radius:12px; padding:11px 20px; border:none; transition:transform .1s, box-shadow .15s, background .15s;
