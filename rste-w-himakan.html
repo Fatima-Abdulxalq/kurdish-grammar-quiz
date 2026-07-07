@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ڕستە و هێماکان (Sentences & Punctuation) - پۆلی پێنجەم</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#E7F0EA; --paper:#FFFFFF; --paper-warm:#FCFEFC; --ink:#1E3A30; --ink-soft:#557167;
+    --green:#0F6B4F; --green-deep:#0A4A37; --green-bright:#1F9D6B;
+    --gold:#F2A516; --gold-soft:#FBE7BE; --gold-line:#F6C760;
+    --coral:#E2574C; --coral-soft:#FCE3DF;
+    --line:#D8E5DD; --line-soft:#E9F1EC; --ring:rgba(15,107,79,.30);
+    --shadow:0 10px 30px -12px rgba(10,74,55,.28); --shadow-sm:0 4px 14px -8px rgba(10,74,55,.30);
+    --radius:18px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; font-family:'Vazirmatn','Noto Naskh Arabic','Segoe UI',Tahoma,sans-serif; color:var(--ink);
+    background-color:var(--bg); background-image:radial-gradient(rgba(15,107,79,.07) 1.1px, transparent 1.1px);
+    background-size:22px 22px; line-height:1.85; -webkit-font-smoothing:antialiased;
+  }
+  .appbar{ position:sticky; top:0; z-index:40; background:linear-gradient(135deg,var(--green) 0%, var(--green-deep) 100%);
+    color:#fff; box-shadow:0 8px 24px -10px rgba(10,74,55,.55); border-bottom:3px solid var(--gold); overflow:hidden; }
+  .appbar::after{ content:""; position:absolute; width:200px; height:200px; right:-70px; top:-90px;
+    background:conic-gradient(from 0deg, rgba(246,199,96,.0) 0deg, rgba(246,199,96,.0) 14deg, rgba(246,199,96,.22) 18deg, rgba(246,199,96,.0) 22deg);
+    border-radius:50%; pointer-events:none; }
+  .appbar-inner{max-width:920px; margin:0 auto; padding:14px 20px;}
+  .bar-top{display:flex; align-items:center; gap:14px; flex-wrap:wrap;}
+  .brand{display:flex; align-items:center; gap:12px; margin-inline-end:auto;}
+  .brand h1{font-size:1.32rem; font-weight:900; margin:0; letter-spacing:.2px;}
+  .brand p{margin:0; font-size:.82rem; opacity:.9; font-weight:400;}
+  .sun-badge{ width:44px;height:44px;border-radius:50%; background:radial-gradient(circle at 50% 45%, #FFD969, var(--gold) 70%);
+    box-shadow:0 0 0 4px rgba(255,217,105,.20), 0 0 18px rgba(246,199,96,.5); flex:none; }
+  .score-chip{ display:flex; align-items:center; gap:8px; background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.28);
+    padding:7px 13px; border-radius:999px; font-weight:700; font-size:.92rem; white-space:nowrap; }
+  .bar-actions{display:flex; gap:8px; flex-wrap:wrap;}
+  .icon-btn{ background:rgba(255,255,255,.14); color:#fff; border:1px solid rgba(255,255,255,.28);
+    padding:7px 14px; border-radius:999px; font-family:inherit; font-size:.86rem; font-weight:600;
+    cursor:pointer; transition:background .15s; text-decoration:none; display:inline-block; }
+  .icon-btn:hover{background:rgba(255,255,255,.26)}
+  .progress-wrap{margin-top:12px;}
+  .progress-track{ position:relative; height:16px; border-radius:999px; background:linear-gradient(180deg,#0c3a2c,#0a4a37);
+    border:1px solid rgba(255,255,255,.18); overflow:visible; }
+  .progress-fill{ position:absolute; top:0; right:0; bottom:0; width:0%;
+    background:linear-gradient(90deg,var(--gold) 0%, #FFD86B 60%, var(--green-bright) 100%);
+    border-radius:999px; transition:width .7s cubic-bezier(.22,1,.36,1); }
+  .progress-sun{ position:absolute; top:50%; right:-2px; width:26px; height:26px; margin-top:-13px; border-radius:50%;
+    background:radial-gradient(circle at 50% 45%, #FFE08A, var(--gold) 72%);
+    box-shadow:0 0 0 3px rgba(255,224,138,.35), 0 0 14px rgba(246,199,96,.8);
+    transition:right .7s cubic-bezier(.22,1,.36,1); }
+  .progress-meta{display:flex; justify-content:space-between; font-size:.78rem; opacity:.92; margin-top:7px;}
+  main{max-width:920px; margin:0 auto; padding:26px 18px 70px;}
+  .card{ background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow-sm);
+    padding:24px; margin-bottom:22px; opacity:0; transform:translateY(10px); animation:rise .5s ease forwards; }
+  @keyframes rise{to{opacity:1; transform:none;}}
+  .ex-head{display:flex; align-items:center; gap:14px; margin-bottom:4px;}
+  .num{ flex:none; width:42px; height:42px; border-radius:50%; display:grid; place-items:center; font-weight:900; font-size:1.05rem;
+    color:var(--green-deep); background:radial-gradient(circle at 50% 40%, #FFE7AE, var(--gold-line) 78%); box-shadow:0 0 0 4px var(--gold-soft); }
+  .ex-head h2{margin:0; font-size:1.18rem; font-weight:800; color:var(--green-deep);}
+  .ex-sub{margin:2px 0 18px; color:var(--ink-soft); font-size:.95rem;}
+  .write{ width:100%; font-family:inherit; font-size:1.05rem; color:var(--ink); border:1.5px solid var(--line); border-radius:12px;
+    padding:11px 14px; outline:none; background:var(--paper-warm); transition:border-color .15s, box-shadow .15s, background .15s; }
+  .write:focus{border-color:var(--green); box-shadow:0 0 0 4px var(--ring); background:#fff;}
+  .prompt{font-size:1.08rem; margin:0 0 8px; font-weight:700; color:var(--coral);}
+  .stack{display:flex; flex-direction:column; gap:18px;}
+  .grid2{display:grid; grid-template-columns:repeat(2,1fr); gap:14px;}
+  .mini{border:1px solid var(--line); border-radius:14px; background:var(--paper-warm); padding:14px;}
+  .mini label{display:block; font-weight:800; color:var(--green-deep); margin-bottom:7px; font-size:1.05rem;}
+  .mark-badge{ display:inline-grid; place-items:center; width:30px; height:30px; border-radius:8px; background:var(--gold-soft);
+    color:var(--green-deep); font-weight:900; margin-inline-end:8px; }
+  .actions{display:flex; flex-wrap:wrap; gap:10px; margin-top:18px;}
+  .btn{ font-family:inherit; font-weight:700; font-size:.98rem; cursor:pointer; border-radius:12px; padding:11px 20px; border:none;
+    transition:transform .1s, box-shadow .15s, background .15s; }
+  .btn:active{transform:translateY(1px)}
+  .btn-primary{background:var(--green); color:#fff; box-shadow:0 8px 18px -10px rgba(15,107,79,.7);}
+  .btn-primary:hover{background:var(--green-deep)}
+  .feedback{margin-top:14px; font-weight:700; min-height:1.4em; display:flex; align-items:center; gap:8px;}
+  .feedback.good{color:var(--green-bright)}
+  @keyframes shake{10%,90%{transform:translateX(-1px)}20%,80%{transform:translateX(2px)}30%,50%,70%{transform:translateX(-4px)}40%,60%{transform:translateX(4px)}}
+  .shake{animation:shake .4s}
+  @keyframes pop{0%{transform:scale(1)}45%{transform:scale(1.06)}100%{transform:scale(1)}}
+  .pop{animation:pop .35s ease}
+  .quiz-q{border:1px solid var(--line-soft); border-radius:14px; padding:16px; margin-bottom:14px; background:var(--paper-warm);}
+  .quiz-q .stem{font-size:1.1rem; font-weight:700; margin:0 0 12px; color:var(--green-deep);}
+  .opts{display:flex; flex-wrap:wrap; gap:10px;}
+  .opt{ font-family:inherit; font-size:1.15rem; font-weight:700; cursor:pointer; border:1.5px solid var(--line); background:#fff;
+    color:var(--ink); border-radius:999px; padding:9px 24px; transition:all .12s; }
+  .opt:hover{border-color:var(--green);}
+  .opt.ok{background:#EAF7F0; border-color:var(--green-bright); color:var(--green-deep);}
+  .opt.no{background:var(--coral-soft); border-color:var(--coral); color:#9B2B22;}
+  .opt:disabled{cursor:default;}
+  .match-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; align-items:start;}
+  .match-col h3{font-size:.95rem; color:var(--ink-soft); font-weight:700; margin:0 0 10px; text-align:center;}
+  .match-item{ border:1.5px solid var(--line); background:var(--paper-warm); border-radius:12px; padding:12px 14px;
+    font-size:1.02rem; cursor:pointer; user-select:none; transition:all .15s; margin-bottom:10px; }
+  .match-item:hover{border-color:var(--green); background:#fff;}
+  .match-item.sel{border-color:var(--gold); background:#FFF6E2; box-shadow:0 0 0 3px var(--gold-soft);}
+  .match-item.done{border-color:var(--green-bright); background:#EAF7F0; color:var(--green-deep); font-weight:700; cursor:default; opacity:.95;}
+  .match-item.done::after{content:" ✓"; color:var(--green-bright);}
+  .letter-grid{border-collapse:collapse; margin:0 auto 20px; font-size:1.35rem; font-weight:800; color:var(--green-deep); text-align:center;}
+  .letter-grid td{border:1.5px solid var(--line); width:44px; height:44px; background:var(--paper-warm);}
+  .section-title{text-align:center; color:var(--green-deep); font-size:1.3rem; margin:30px 0 18px;}
+  .footnote{text-align:center; color:var(--ink-soft); font-size:.82rem; margin-top:22px;}
+  #celebrate{ position:fixed; inset:auto 0 26px 0; margin:0 auto; width:max-content; max-width:90%; background:var(--green-deep);
+    color:#fff; padding:14px 26px; border-radius:999px; box-shadow:0 16px 40px -12px rgba(0,0,0,.5); font-weight:800; z-index:60;
+    border:2px solid var(--gold); display:none; align-items:center; gap:10px; }
+  #confetti{position:fixed; inset:0; pointer-events:none; z-index:55;}
+  @media (max-width:640px){ .grid2,.match-grid,.quiz-q .opts{grid-template-columns:1fr;} .opts{flex-direction:column;} .opt{text-align:center;}
+    .brand h1{font-size:1.1rem;} .card{padding:18px;} .match-grid{grid-template-columns:1fr 1fr;} .letter-grid td{width:36px; height:36px; font-size:1.1rem;} }
+  @media (prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important; scroll-behavior:auto !important;} }
+</style>
+</head>
+<body>
+<canvas id="confetti"></canvas>
+<div id="celebrate">🎉 ئافەرین! هەموو پرسیارەکانت ڕاست بوون (Excellent Job!) ☀️</div>
+<header class="appbar">
+  <div class="appbar-inner">
+    <div class="bar-top">
+      <div class="brand">
+        <div class="sun-badge" aria-hidden="true"></div>
+        <div>
+          <h1>ڕستە و هێماکان (Sentences & Punctuation)</h1>
+          <p>ڕێزمان (Grammar) • پۆلی پێنجەم (Grade 5)</p>
+        </div>
+      </div>
+      <div class="score-chip">☀️ <span id="scoreText">٠ / ١١ خاڵ (Points)</span></div>
+      <div class="bar-actions">
+        <a href="class-5.html" class="icon-btn">→ گەڕانەوە (Back to Lessons)</a>
+        <button class="icon-btn" onclick="resetAll()">دووبارە دەستپێبکە (Reset)</button>
+      </div>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-track">
+        <div class="progress-fill" id="progFill"></div>
+        <div class="progress-sun" id="progSun" aria-hidden="true"></div>
+      </div>
+      <div class="progress-meta"><span>خۆرەکە تا کۆتایی بەرز بکەرەوە (Progress) 🌅</span><span id="progPct">٠٪</span></div>
+    </div>
+  </div>
+</header>
+<main>
+  <section class="card">
+    <div class="ex-head"><span class="num">★</span><h2>ناساندنی ڕستە و هێماکان (Introduction)</h2></div>
+    <p>ڕستە <b>(Sentence)</b> چەند وشەیەکە واتایەکی تەواو دەبەخشن و لەکۆتاییدا بە پێی مەبەست هێمای <b>(Punctuation Mark)</b> بۆ دادەنرێ.</p>
+    <ol style="margin:10px 0 0; padding-inline-start:22px; line-height:2;">
+      <li>باران باری.</li>
+      <li>ئایا هێمن ڕۆیشت؟</li>
+      <li>باخەوانەکە نەمامەکەی چاند.</li>
+      <li>ئای خواردنی میوە چەند بەسوودە!</li>
+    </ol>
+  </section>
+
+  <section class="card">
+    <div class="ex-head"><span class="num">★</span><h2>خاڵبەندی (Punctuation Rules)</h2></div>
+    <div class="grid2">
+      <div class="mini"><span class="mark-badge">.</span><b>ڕستەی هەواڵدەر (Full Stop)</b><br><span style="color:var(--ink-soft);">بۆ کۆتایی ڕستە: هەولێر پایتەختی کوردستانە.</span></div>
+      <div class="mini"><span class="mark-badge">،</span><b>جیاکردنەوەی وشە (Comma)</b><br><span style="color:var(--ink-soft);">بۆ پشوودان: خیراکە وەرە ژوورێ،</span></div>
+      <div class="mini"><span class="mark-badge">؟</span><b>ڕستەی پرسیاری (Question Mark)</b><br><span style="color:var(--ink-soft);">بۆ پرسیار: کەی منداڵەکە نوست؟</span></div>
+      <div class="mini"><span class="mark-badge">:</span><b>پێش گێڕانەوە (Colon)</b><br><span style="color:var(--ink-soft);">پێش ئاخاوتن: ڕاز گوتی: ڕەوا سێوەکەی خوارد.</span></div>
+      <div class="mini"><span class="mark-badge">!</span><b>سەرسوڕمان (Exclamation)</b><br><span style="color:var(--ink-soft);">بۆ هەستی دەروونی: ئای خوایە، لەو جوانییە!</span></div>
+      <div class="mini"><span class="mark-badge">( )</span><b>کەوانە (Parentheses)</b><br><span style="color:var(--ink-soft);">بۆ ناوی تایبەت یان ساڵ: عەزیز گەردی لە (١٩٤٨ز) لە دایکبووە.</span></div>
+    </div>
+  </section>
+
+  <h2 class="section-title">چالاکی و ڕاهێنان (Exercises)</h2>
+
+  <section class="card" id="act3">
+    <div class="ex-head"><span class="num">٣</span><h2>نیشانە گونجاوەکان (. ، ؟ !) دادەنێم (Insert Punctuation)</h2></div>
+    <div id="act3Box"></div>
+  </section>
+
+  <section class="card" id="act4">
+    <div class="ex-head"><span class="num">٤</span><h2>ڕستە دروستدەکەم و هێمای بۆ دادەنێم (Sentence Building)</h2></div>
+    <p class="ex-sub">پەیڤەکان بە ڕێزبەندی ڕاست دابنێ و هێمای گونجاو زیاد بکە.</p>
+    <div class="stack">
+      <div><p class="prompt">١- هەیە، زەویم، زێڕو، تورەگەیەک، ipad_holder، پارچەیەک</p><input class="write" placeholder="ڕستەکە لێرە بنووسە..."></div>
+      <div><p class="prompt">٢- زەوی و، کامیان، کێ، زێڕ، دەزانی، بەنرخترە، لەنێوان</p><input class="write" placeholder="ڕستەکە لێرە بنووسە..."></div>
+      <div><p class="prompt">٣- نیشتیمان، خۆشەیست و، ئای، چەند، بەنرخی</p><input class="write" placeholder="ڕستەکە لێرە بنووسە..."></div>
+      <div><p class="prompt">٤- تورەگە، بۆ، مایەوە، برا، بچوکەکە، زێڕەکە</p><input class="write" placeholder="ڕستەکە لێرە بنووسە..."></div>
+    </div>
+    <p class="ex-sub" style="margin-top:14px; margin-bottom:0;">تێبینی: ئەم بەشە نمرەی خۆکار نییە، مامۆستا هەڵیدەسەنگێنێت (Teacher-graded section).</p>
+  </section>
+
+  <section class="card" id="act5">
+    <div class="ex-head"><span class="num">٥</span><h2>بەیەک دەگەیەنم (Matching Activity)</h2></div>
+    <p class="ex-sub">بەشی یەکەم لە تاکی لای ڕاستەوە ببەستەوە بە بەشە تەواوکارییەکەی لە لای چەپ.</p>
+    <div class="match-grid">
+      <div class="match-col"><h3>بەشی یەکەم (Part A)</h3><div id="matchQ5"></div></div>
+      <div class="match-col"><h3>بەشی دووەم (Part B)</h3><div id="matchA5"></div></div>
+    </div>
+    <div class="feedback" id="fb5"></div>
+  </section>
+
+  <section class="card" id="act6">
+    <div class="ex-head"><span class="num">٦</span><h2>وەڵامی ڕاست هەڵدەبژێرم (Multiple Choice)</h2></div>
+    <div id="act6Box"></div>
+  </section>
+
+  <section class="card" id="act7">
+    <div class="ex-head"><span class="num">٧</span><h2>یاریی تۆڕە وشە (Word Puzzle)</h2></div>
+    <p class="ex-sub">وشەکان بدۆزەرەوە و لە شوێنی بەتاڵ بنووسە.</p>
+    <table class="letter-grid">
+      <tr><td>ن</td><td>ێ</td><td>ڕ</td><td>گ</td><td>ز</td></tr>
+      <tr><td>ش</td><td>د</td><td>ۆ</td><td>ڕ</td><td>و</td></tr>
+      <tr><td>ا</td><td>ت</td><td>ز</td><td>ێ</td><td>پ</td></tr>
+      <tr><td>خ</td><td>ڕ</td><td>ن</td><td>هـ</td><td>ب</td></tr>
+    </table>
+    <div class="grid2">
+      <div class="mini"><label>١. ناوی گوڵێکە (Flower)</label><input class="write" placeholder="وەڵام..."></div>
+      <div class="mini"><label>٢. بە واتای گوند (Village)</label><input class="write" placeholder="وەڵام..."></div>
+      <div class="mini"><label>٣. دژواتای کەم (Antonym of: Less)</label><input class="write" placeholder="وەڵام..."></div>
+      <div class="mini"><label>٤. هاوواتای گرانبەها (Synonym of: Valuable)</label><input class="write" placeholder="وەڵام..."></div>
+      <div class="mini"><label>٥. دژواتای دەرمان (Antonym of: Medicine)</label><input class="write" placeholder="وەڵام..."></div>
+      <div class="mini"><label>٦. هاوواتای داو (Synonym of: Trap/Thread)</label><input class="write" placeholder="وەڵام..."></div>
+      <div class="mini"><label>٧. ئەندامی لەشی مرۆڤ (Body Part)</label><input class="write" placeholder="وەڵام..."></div>
+      <div class="mini"><label>٨. پلەی گەرمی (Temperature)</label><input class="write" placeholder="وەڵام..."></div>
+      <div class="mini"><label>٩. بەرهەمی ماستە (Dairy Product)</label><input class="write" placeholder="وەڵام..."></div>
+    </div>
+    <p class="ex-sub" style="margin-top:14px; margin-bottom:0;">تێبینی: ئەم بەشە لەلایەن مامۆستاوە پشکنینی بۆ دەکرێت (To be checked with teacher).</p>
+  </section>
+
+  <section class="card" id="act8">
+    <div class="ex-head"><span class="num">٨</span><h2>خاڵبەندی بۆ ئەم ڕستانە دادەنێم (Add Punctuation)</h2></div>
+    <div class="stack">
+      <div><p class="prompt">١- کتێبی شەڕەفنامە کە شەرەف خانی بەدلیسی نووسیویەتی</p><input class="write" placeholder="ڕستەکە بە هێمای گونجاو بنووسەوە..."></div>
+      <div><p class="prompt">٢- مامۆستا گوتی قوتابینە وانەکانتان بخوێنن</p><input class="write" placeholder="ڕستەکە بە هێمای گونجاو بنووسەوە..."></div>
+      <div><p class="prompt">٣- له چ ساڵێک پیرەمێرد لە دایکبووە</p><input class="write" placeholder="ڕستەکە بە هێمای گونجاو بنووسەوە..."></div>
+    </div>
+    <p class="ex-sub" style="margin-top:14px; margin-bottom:0;">تێبینی: ئەم بەشە نمرەی خۆکار نییە (Teacher-graded section).</p>
+  </section>
+
+  <p class="footnote">پۆلی پێنجەم • ڕێزمان (Grade 5 Grammar Lesson)</p>
+</main>
+<script>
+const AR = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+const toAr = n => String(n).replace(/\d/g, d => AR[+d]);
+const MAX = 11;
+let score3 = 0, score5 = 0, score6 = 0, celebrated = false;
+function totalScore(){ return score3 + score5 + score6; }
+
+function flash(el, ok){ el.classList.remove('shake','pop'); void el.offsetWidth; el.classList.add(ok?'pop':'shake'); }
+function setFb(id, msg, kind){ const el=document.getElementById(id); el.textContent=msg; el.className='feedback '+(kind||''); }
+function updateProgress(){
+  const pts = totalScore();
+  const pct = Math.round((pts/MAX)*100);
+  document.getElementById('progFill').style.width = pct+'%';
+  document.getElementById('progSun').style.right = 'calc('+pct+'% - 14px)';
+  document.getElementById('progPct').textContent = toAr(pct)+'٪';
+  document.getElementById('scoreText').textContent = toAr(pts)+' / '+toAr(MAX)+' خاڵ (Points)';
+  if(pts>=MAX && !celebrated){ celebrated=true; celebrate(); }
+}
+
+/* Activity 3 */
+const act3 = [
+  {text:'ئای پێشمەرگە زۆر دلێرە', correct:'!'},
+  {text:'خاکی کوردستان بەپیتە', correct:'.'},
+  {text:'کوردستان چەند شارە', correct:'؟'},
+  {text:'نەمامەکەت چاند', correct:'.'}
+];
+function buildAct3(){
+  const box = document.getElementById('act3Box');
+  box.innerHTML = '';
+  const marks = ['.','،','؟','!'];
+  act3.forEach((item,qi)=>{
+    const wrap = document.createElement('div');
+    wrap.className = 'quiz-q';
+    const stem = document.createElement('p');
+    stem.className = 'stem';
+    stem.textContent = toAr(qi+1) + '- ' + item.text;
+    const opts = document.createElement('div');
+    opts.className = 'opts';
+    marks.forEach(m=>{
+      const b = document.createElement('button');
+      b.className = 'opt'; b.textContent = m;
+      b.onclick = ()=>answerAct3(b, opts, m, item.correct);
+      opts.appendChild(b);
+    });
+    wrap.appendChild(stem); wrap.appendChild(opts);
+    box.appendChild(wrap);
+  });
+}
+function answerAct3(btn, group, picked, correct){
+  if(group.dataset.locked) return;
+  group.dataset.locked = '1';
+  group.querySelectorAll('.opt').forEach(o=>{ o.disabled=true; if(o.textContent===correct) o.classList.add('ok'); });
+  if(picked===correct){ score3++; } else { btn.classList.add('no'); flash(btn,false); }
+  updateProgress();
+}
+
+/* Activity 5 */
+const pairs5 = [
+  {q:'زمانی کوردی', a:'زۆر شیرینە!'},
+  {q:'دوای چەند ساڵێک', a:'توانی پارچە زەوێکی تر بکڕێ.'},
+  {q:'بەخەمبارییەوە گەڕایەوە', a:'بۆلای برا گەورەکەی.'},
+  {q:'کێ دەزانی زەوی و', a:'زێڕ کامیان بەنرخترە؟'}
+];
+let selQ5 = null, matched5 = 0;
+function shuffle(arr){ return arr.map(x=>[Math.random(),x]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]); }
+function buildMatch5(){
+  selQ5=null; matched5=0; score5=0;
+  const qBox=document.getElementById('matchQ5'), aBox=document.getElementById('matchA5');
+  qBox.innerHTML=''; aBox.innerHTML='';
+  pairs5.forEach((p,i)=>{
+    const q=document.createElement('div');
+    q.className='match-item'; q.textContent=p.q; q.dataset.k=i;
+    q.onclick=()=>selectQ5(q);
+    qBox.appendChild(q);
+  });
+  shuffle(pairs5.map((p,i)=>({k:i,a:p.a}))).forEach(item=>{
+    const a=document.createElement('div');
+    a.className='match-item'; a.textContent=item.a; a.dataset.k=item.k;
+    a.onclick=()=>selectA5(a);
+    aBox.appendChild(a);
+  });
+}
+function selectQ5(el){
+  if(el.classList.contains('done')) return;
+  document.querySelectorAll('#matchQ5 .match-item').forEach(x=>x.classList.remove('sel'));
+  el.classList.add('sel'); selQ5=el;
+}
+function selectA5(el){
+  if(el.classList.contains('done') || !selQ5) return;
+  if(el.dataset.k===selQ5.dataset.k){
+    el.classList.add('done'); selQ5.classList.add('done'); selQ5.classList.remove('sel');
+    selQ5=null; matched5++; score5=matched5; updateProgress();
+    if(matched5===pairs5.length) setFb('fb5','✓ هەموو جووتەکان بەستران! (All matched!)','good');
+  } else { flash(el,false); flash(selQ5,false); }
+}
+
+/* Activity 6 */
+const act6 = [
+  {stem:'مامۆستا بێریڤان وانەی زمانی ( ) دەڵێتەوە.', opts:['عەرەبی','ئینگلیزی','کوردی'], correct:2, graded:true},
+  {stem:'لەسەردەمێکی ( ) دا باوکێک دوو کوڕی هەبوو.', opts:['نوێ','دێرین','هاوچەرخ'], correct:1, graded:true},
+  {stem:'براکەی ( ) کرد.', opts:['هاوکاریی','پەشیمانی','زویری'], correct:null, graded:false},
+  {stem:'بۆتان دەرکەوت ( ) بەنرخترە.', opts:['زێڕ','پارە','نیشتیمان'], correct:2, graded:true}
+];
+function buildAct6(){
+  const box = document.getElementById('act6Box');
+  box.innerHTML = '';
+  act6.forEach((q,qi)=>{
+    const wrap = document.createElement('div');
+    wrap.className = 'quiz-q';
+    const stem = document.createElement('p');
+    stem.className = 'stem';
+    stem.textContent = toAr(qi+1) + '- ' + q.stem;
+    const opts = document.createElement('div');
+    opts.className = 'opts';
+    q.opts.forEach((text,oi)=>{
+      const b = document.createElement('button');
+      b.className = 'opt'; b.textContent = text;
+      b.onclick = ()=>answerAct6(b, opts, oi, q);
+      opts.appendChild(b);
+    });
+    wrap.appendChild(stem); wrap.appendChild(opts);
+    if(!q.graded){
+      const note = document.createElement('p');
+      note.className='ex-sub'; note.style.margin='10px 0 0';
+      note.textContent='ئەم پرسیارە بۆ گفتوگۆیە لەگەڵ مامۆستایە، نمرەی نییە (Discussion question).';
+      wrap.appendChild(note);
+    }
+    box.appendChild(wrap);
+  });
+}
+function answerAct6(btn, group, oi, q){
+  if(group.dataset.locked) return;
+  group.dataset.locked = '1';
+  const buttons = group.querySelectorAll('.opt');
+  if(q.graded){
+    buttons.forEach((o,i)=>{ o.disabled=true; if(i===q.correct) o.classList.add('ok'); });
+    if(oi===q.correct){ score6++; } else { btn.classList.add('no'); flash(btn,false); }
+  } else {
+    buttons.forEach(o=>{ o.disabled=true; });
+    btn.style.borderColor = 'var(--ink-soft)';
+  }
+  updateProgress();
+}
+
+function resetAll(){
+  score3=0; score5=0; score6=0; celebrated=false;
+  document.getElementById('celebrate').style.display='none';
+  document.getElementById('fb5').textContent='';
+  document.querySelectorAll('input.write').forEach(el=>el.value='');
+  buildAct3(); buildMatch5(); buildAct6();
+  updateProgress();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function celebrate(){
+  const banner = document.getElementById('celebrate');
+  banner.style.display='flex';
+  setTimeout(()=>{ banner.style.display='none'; }, 6000);
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  runConfetti();
+}
+function runConfetti(){
+  const cv=document.getElementById('confetti'); const ctx=cv.getContext('2d');
+  cv.width=innerWidth; cv.height=innerHeight;
+  const colors=['#F2A516','#1F9D6B','#E2574C','#0F6B4F','#FFD86B']; const N=140;
+  const parts=Array.from({length:N},()=>({
+    x:Math.random()*cv.width, y:-20-Math.random()*cv.height*0.5, r:5+Math.random()*7,
+    c:colors[(Math.random()*colors.length)|0], vy:2+Math.random()*3.5, vx:-1.5+Math.random()*3,
+    rot:Math.random()*6.28, vr:-0.2+Math.random()*0.4
+  }));
+  let frames=0;
+  (function tick(){
+    ctx.clearRect(0,0,cv.width,cv.height);
+    parts.forEach(p=>{
+      p.x+=p.vx; p.y+=p.vy; p.rot+=p.vr;
+      ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot);
+      ctx.fillStyle=p.c; ctx.fillRect(-p.r/2,-p.r/2,p.r,p.r*0.6);
+      ctx.restore();
+    });
+    frames++;
+    if(frames<170) requestAnimationFrame(tick); else ctx.clearRect(0,0,cv.width,cv.height);
+  })();
+}
+window.addEventListener('resize', ()=>{ const cv=document.getElementById('confetti'); cv.width=innerWidth; cv.height=innerHeight; });
+
+buildAct3(); buildMatch5(); buildAct6(); updateProgress();
+</script>
+</body>
+</html>
