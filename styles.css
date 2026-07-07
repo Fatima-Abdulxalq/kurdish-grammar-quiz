@@ -172,6 +172,12 @@ main{max-width:920px; margin:0 auto; padding:30px 18px 70px;}
 .card .sun-emoji{font-size:2.4rem;}
 .card h2{color:var(--green-deep); font-size:1.3rem; margin:10px 0 8px;}
 .card p{color:var(--ink-soft); margin:0;}
+.card.about-card{background:var(--paper-warm); border:1.5px solid var(--gold-line);}
+.card.about-card p{color:var(--ink); line-height:1.8;}
+.card.analogy-card{border-right:5px solid var(--gold);}
+.card.analogy-card p{font-size:1.05rem;}
+.card.analogy-card p:last-child{margin-bottom:0;}
+.en{color:var(--ink-soft); font-weight:400;}
 
 /* ---------- Reading / story pages ---------- */
 .hero-frame{ background:linear-gradient(160deg, var(--paper), var(--paper-warm)); border:1px solid var(--line);
