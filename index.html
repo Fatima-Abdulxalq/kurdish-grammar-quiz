@@ -7,99 +7,18 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg:#E7F0EA;
-    --paper:#FFFFFF;
-    --ink:#1E3A30;
-    --ink-soft:#557167;
-    --green:#0F6B4F;
-    --green-deep:#0A4A37;
-    --gold:#F2A516;
-    --gold-soft:#FBE7BE;
-    --gold-line:#F6C760;
-    --line:#D8E5DD;
-    --shadow:0 10px 30px -12px rgba(10,74,55,.28);
-    --shadow-sm:0 4px 14px -8px rgba(10,74,55,.30);
-    --radius:18px;
-  }
-  *{box-sizing:border-box}
-  body{
-    margin:0;
-    font-family:'Vazirmatn','Noto Naskh Arabic','Segoe UI',Tahoma,sans-serif;
-    color:var(--ink);
-    background-color:var(--bg);
-    background-image:radial-gradient(rgba(15,107,79,.07) 1.1px, transparent 1.1px);
-    background-size:22px 22px;
-    line-height:1.85;
-    -webkit-font-smoothing:antialiased;
-  }
-  .appbar{
-    position:sticky; top:0; z-index:40;
-    background:linear-gradient(135deg,var(--green) 0%, var(--green-deep) 100%);
-    color:#fff;
-    box-shadow:0 8px 24px -10px rgba(10,74,55,.55);
-    border-bottom:3px solid var(--gold);
-    overflow:hidden;
-  }
-  .appbar::after{
-    content:""; position:absolute; width:200px; height:200px; right:-70px; top:-90px;
-    background:conic-gradient(from 0deg, rgba(246,199,96,.0) 0deg, rgba(246,199,96,.0) 14deg, rgba(246,199,96,.22) 18deg, rgba(246,199,96,.0) 22deg);
-    border-radius:50%; pointer-events:none;
-  }
-  .appbar-inner{max-width:920px; margin:0 auto; padding:22px 20px; position:relative;}
-  .brand{display:flex; align-items:center; gap:14px;}
-  .brand h1{font-size:1.5rem; font-weight:900; margin:0; letter-spacing:.2px;}
-  .brand p{margin:4px 0 0; font-size:.86rem; opacity:.9; font-weight:400;}
-  .sun-badge{
-    width:48px;height:48px;border-radius:50%;
-    background:radial-gradient(circle at 50% 45%, #FFE8A3, #FFD969 45%, var(--gold) 75%);
-    box-shadow:0 0 0 4px rgba(255,217,105,.20), 0 0 18px rgba(246,199,96,.5);
-    flex:none; position:relative;
-    animation:sun-glow 3.5s ease-in-out infinite;
-  }
-  .sun-badge::before{
-    content:""; position:absolute; inset:-8px;
-    background:conic-gradient(from 0deg, var(--gold-line) 0 6%, transparent 6% 12.5%);
-    border-radius:50%;
-    -webkit-mask:radial-gradient(transparent 56%, #000 57%); mask:radial-gradient(transparent 56%, #000 57%);
-    opacity:.85;
-    animation:sun-spin 24s linear infinite;
-  }
-  @keyframes sun-glow{
-    0%,100%{ box-shadow:0 0 0 4px rgba(255,217,105,.20), 0 0 18px rgba(246,199,96,.5); }
-    50%{ box-shadow:0 0 0 6px rgba(255,217,105,.32), 0 0 26px rgba(246,199,96,.8); }
-  }
-  @keyframes sun-spin{ from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
-  main{max-width:920px; margin:0 auto; padding:34px 18px 70px;}
-  .grid{display:grid; grid-template-columns:repeat(2,1fr); gap:18px;}
-  .nav-card{
-    display:block; background:var(--paper); border:1px solid var(--line); border-radius:var(--radius);
-    box-shadow:var(--shadow-sm); padding:24px; text-decoration:none; color:inherit;
-    transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
-  }
-  .nav-card:hover{transform:translateY(-4px); box-shadow:var(--shadow); border-color:var(--gold-line);}
-  .nav-badge{
-    width:46px; height:46px; border-radius:50%; display:grid; place-items:center;
-    font-weight:900; font-size:1.15rem; color:var(--green-deep); margin-bottom:14px;
-    background:radial-gradient(circle at 50% 40%, #FFE7AE, var(--gold-line) 78%);
-    box-shadow:0 0 0 4px var(--gold-soft);
-  }
-  .nav-card h3{margin:0 0 6px; color:var(--green-deep); font-size:1.2rem; font-weight:800;}
-  .nav-card p{margin:0; color:var(--ink-soft); font-size:.92rem;}
-  .footnote{text-align:center; color:var(--ink-soft); font-size:.82rem; margin-top:34px;}
-  @media (max-width:640px){ .grid{grid-template-columns:1fr;} .brand h1{font-size:1.2rem;} }
-  @media (prefers-reduced-motion: reduce){ *{transition:none !important; animation:none !important;} }
-</style>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <header class="appbar">
   <div class="appbar-inner">
-    <div class="brand">
-      <div class="sun-badge" aria-hidden="true"></div>
-      <div>
-        <h1>ڕاهێنانەکانی زمانی کوردی</h1>
-        <p>پۆلێک هەڵبژێرە بۆ دەستپێکردن</p>
+    <div class="bar-top">
+      <div class="brand">
+        <div class="sun-badge" aria-hidden="true"></div>
+        <div>
+          <h1>ڕاهێنانەکانی زمانی کوردی</h1>
+          <p>پۆلێک هەڵبژێرە بۆ دەستپێکردن</p>
+        </div>
       </div>
     </div>
   </div>

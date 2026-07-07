@@ -7,199 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg:#E7F0EA;
-    --paper:#FFFFFF;
-    --paper-warm:#FCFEFC;
-    --ink:#1E3A30;
-    --ink-soft:#557167;
-    --green:#0F6B4F;
-    --green-deep:#0A4A37;
-    --green-bright:#1F9D6B;
-    --gold:#F2A516;
-    --gold-soft:#FBE7BE;
-    --gold-line:#F6C760;
-    --coral:#E2574C;
-    --coral-soft:#FCE3DF;
-    --line:#D8E5DD;
-    --line-soft:#E9F1EC;
-    --ring:rgba(15,107,79,.30);
-    --shadow:0 10px 30px -12px rgba(10,74,55,.28);
-    --shadow-sm:0 4px 14px -8px rgba(10,74,55,.30);
-    --radius:18px;
-  }
-  *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{
-    margin:0;
-    font-family:'Vazirmatn','Noto Naskh Arabic','Segoe UI',Tahoma,sans-serif;
-    color:var(--ink);
-    background-color:var(--bg);
-    background-image:radial-gradient(rgba(15,107,79,.07) 1.1px, transparent 1.1px);
-    background-size:22px 22px;
-    line-height:1.85;
-    -webkit-font-smoothing:antialiased;
-  }
-  .appbar{
-    position:sticky; top:0; z-index:40;
-    background:linear-gradient(135deg,var(--green) 0%, var(--green-deep) 100%);
-    color:#fff;
-    box-shadow:0 8px 24px -10px rgba(10,74,55,.55);
-    border-bottom:3px solid var(--gold);
-    overflow:hidden;
-  }
-  .appbar::after{
-    content:""; position:absolute; width:200px; height:200px; right:-70px; top:-90px;
-    background:conic-gradient(from 0deg, rgba(246,199,96,.0) 0deg, rgba(246,199,96,.0) 14deg, rgba(246,199,96,.22) 18deg, rgba(246,199,96,.0) 22deg);
-    border-radius:50%; pointer-events:none;
-  }
-  .appbar-inner{max-width:920px; margin:0 auto; padding:14px 20px;}
-  .bar-top{display:flex; align-items:center; gap:14px; flex-wrap:wrap;}
-  .brand{display:flex; align-items:center; gap:12px; margin-inline-end:auto;}
-  .brand h1{font-size:1.32rem; font-weight:900; margin:0; letter-spacing:.2px;}
-  .brand p{margin:0; font-size:.82rem; opacity:.9; font-weight:400;}
-  .sun-badge{
-    width:44px;height:44px;border-radius:50%;
-    background:radial-gradient(circle at 50% 45%, #FFE8A3, #FFD969 45%, var(--gold) 75%);
-    box-shadow:0 0 0 4px rgba(255,217,105,.20), 0 0 18px rgba(246,199,96,.5);
-    flex:none; position:relative;
-    animation:sun-glow 3.5s ease-in-out infinite;
-  }
-  .sun-badge::before{
-    content:""; position:absolute; inset:-7px;
-    background:conic-gradient(from 0deg, var(--gold-line) 0 6%, transparent 6% 12.5%);
-    border-radius:50%;
-    -webkit-mask:radial-gradient(transparent 56%, #000 57%); mask:radial-gradient(transparent 56%, #000 57%);
-    opacity:.85;
-    animation:sun-spin 24s linear infinite;
-  }
-  @keyframes sun-glow{
-    0%,100%{ box-shadow:0 0 0 4px rgba(255,217,105,.20), 0 0 18px rgba(246,199,96,.5); }
-    50%{ box-shadow:0 0 0 6px rgba(255,217,105,.32), 0 0 26px rgba(246,199,96,.8); }
-  }
-  @keyframes sun-spin{ from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
-  .score-chip{
-    display:flex; align-items:center; gap:8px;
-    background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.28);
-    padding:7px 13px; border-radius:999px; font-weight:700; font-size:.92rem;
-    white-space:nowrap;
-  }
-  .bar-actions{display:flex; gap:8px; flex-wrap:wrap;}
-  .icon-btn{
-    background:rgba(255,255,255,.14); color:#fff; border:1px solid rgba(255,255,255,.28);
-    padding:7px 14px; border-radius:999px; font-family:inherit; font-size:.86rem; font-weight:600;
-    cursor:pointer; transition:background .15s, transform .1s; text-decoration:none; display:inline-block;
-  }
-  .icon-btn:hover{background:rgba(255,255,255,.26)}
-  .icon-btn:active{transform:translateY(1px)}
-  .progress-wrap{margin-top:12px;}
-  .progress-track{
-    position:relative; height:16px; border-radius:999px;
-    background:linear-gradient(180deg,#0c3a2c,#0a4a37);
-    border:1px solid rgba(255,255,255,.18); overflow:visible;
-  }
-  .progress-fill{
-    position:absolute; top:0; right:0; bottom:0; width:0%;
-    background:linear-gradient(90deg,var(--gold) 0%, #FFD86B 60%, var(--green-bright) 100%);
-    border-radius:999px; transition:width .7s cubic-bezier(.22,1,.36,1);
-  }
-  .progress-sun{
-    position:absolute; top:50%; right:-2px; width:26px; height:26px; margin-top:-13px;
-    border-radius:50%;
-    background:radial-gradient(circle at 50% 45%, #FFE08A, var(--gold) 72%);
-    box-shadow:0 0 0 3px rgba(255,224,138,.35), 0 0 14px rgba(246,199,96,.8);
-    transition:right .7s cubic-bezier(.22,1,.36,1);
-  }
-  .progress-meta{display:flex; justify-content:space-between; font-size:.78rem; opacity:.92; margin-top:7px;}
-  main{max-width:920px; margin:0 auto; padding:26px 18px 70px;}
-  .card{
-    background:var(--paper); border:1px solid var(--line);
-    border-radius:var(--radius); box-shadow:var(--shadow-sm);
-    padding:24px; margin-bottom:22px;
-    opacity:0; transform:translateY(10px); animation:rise .5s ease forwards;
-  }
-  @keyframes rise{to{opacity:1; transform:none;}}
-  .ex-head{display:flex; align-items:center; gap:14px; margin-bottom:4px;}
-  .num{
-    flex:none; width:42px; height:42px; border-radius:50%;
-    display:grid; place-items:center; font-weight:900; font-size:1.05rem;
-    color:var(--green-deep);
-    background:radial-gradient(circle at 50% 40%, #FFE7AE, var(--gold-line) 78%);
-    box-shadow:0 0 0 4px var(--gold-soft);
-  }
-  .ex-head h2{margin:0; font-size:1.18rem; font-weight:800; color:var(--green-deep);}
-  .ex-sub{margin:2px 0 18px; color:var(--ink-soft); font-size:.95rem;}
-  .write{
-    width:100%; font-family:inherit; font-size:1.05rem; color:var(--ink);
-    border:1.5px solid var(--line); border-radius:12px; padding:11px 14px; outline:none; background:var(--paper-warm);
-    transition:border-color .15s, box-shadow .15s, background .15s; resize:vertical;
-  }
-  .write:focus{border-color:var(--green); box-shadow:0 0 0 4px var(--ring); background:#fff;}
-  .prompt{font-size:1.08rem; margin:0 0 8px;}
-  .stack{display:flex; flex-direction:column; gap:18px;}
-  .grid2{display:grid; grid-template-columns:repeat(3,1fr); gap:14px;}
-  .mini{border:1px solid var(--line); border-radius:14px; background:var(--paper-warm); padding:14px;}
-  .mini label{display:block; font-weight:800; color:var(--green-deep); margin-bottom:7px; font-size:1.05rem;}
-  .mini .write{font-size:1rem;}
-  .actions{display:flex; flex-wrap:wrap; gap:10px; margin-top:18px;}
-  .btn{
-    font-family:inherit; font-weight:700; font-size:.98rem; cursor:pointer;
-    border-radius:12px; padding:11px 20px; border:none; transition:transform .1s, box-shadow .15s, background .15s;
-  }
-  .btn:active{transform:translateY(1px)}
-  .btn-primary{background:var(--green); color:#fff; box-shadow:0 8px 18px -10px rgba(15,107,79,.7);}
-  .btn-primary:hover{background:var(--green-deep)}
-  .btn-ghost{background:var(--gold-soft); color:var(--green-deep);}
-  .btn-ghost:hover{background:var(--gold-line)}
-  .feedback{margin-top:14px; font-weight:700; min-height:1.4em; display:flex; align-items:center; gap:8px;}
-  .feedback.good{color:var(--green-bright)}
-  .feedback.warn{color:#C77F12}
-  .feedback.bad{color:var(--coral)}
-  @keyframes shake{10%,90%{transform:translateX(-1px)}20%,80%{transform:translateX(2px)}30%,50%,70%{transform:translateX(-4px)}40%,60%{transform:translateX(4px)}}
-  .shake{animation:shake .4s}
-  @keyframes pop{0%{transform:scale(1)}45%{transform:scale(1.06)}100%{transform:scale(1)}}
-  .pop{animation:pop .35s ease}
-  .quiz-q{border:1px solid var(--line-soft); border-radius:14px; padding:16px; margin-bottom:14px; background:var(--paper-warm);}
-  .quiz-q .stem{font-size:1.1rem; font-weight:700; margin:0 0 12px; color:var(--green-deep);}
-  .opts{display:flex; flex-wrap:wrap; gap:10px;}
-  .opt{
-    font-family:inherit; font-size:1.02rem; font-weight:700; cursor:pointer;
-    border:1.5px solid var(--line); background:#fff; color:var(--ink);
-    border-radius:999px; padding:9px 22px; transition:all .12s;
-  }
-  .opt:hover{border-color:var(--green);}
-  .opt.ok{background:#EAF7F0; border-color:var(--green-bright); color:var(--green-deep);}
-  .opt.no{background:var(--coral-soft); border-color:var(--coral); color:#9B2B22;}
-  .opt:disabled{cursor:default;}
-  details.acc{border:1px solid var(--line); border-radius:14px; background:var(--paper); margin-bottom:14px; overflow:hidden;}
-  details.acc summary{
-    cursor:pointer; list-style:none; padding:16px 20px; font-weight:800; color:var(--green-deep);
-    display:flex; align-items:center; gap:10px; font-size:1.05rem;
-  }
-  details.acc summary::-webkit-details-marker{display:none;}
-  details.acc summary .tw{margin-inline-start:auto; transition:transform .2s; color:var(--gold);}
-  details.acc[open] summary .tw{transform:rotate(180deg);}
-  details.acc .body{padding:0 20px 18px; color:var(--ink); font-size:1rem;}
-  .footnote{text-align:center; color:var(--ink-soft); font-size:.82rem; margin-top:22px;}
-  #celebrate{
-    position:fixed; inset:auto 0 26px 0; margin:0 auto; width:max-content; max-width:90%;
-    background:var(--green-deep); color:#fff; padding:14px 26px; border-radius:999px;
-    box-shadow:0 16px 40px -12px rgba(0,0,0,.5); font-weight:800; z-index:60;
-    border:2px solid var(--gold); display:none; align-items:center; gap:10px;
-  }
-  #confetti{position:fixed; inset:0; pointer-events:none; z-index:55;}
-  @media (max-width:640px){
-    .grid2,.quiz-q .opts{grid-template-columns:1fr;}
-    .opts{flex-direction:column;}
-    .opt{text-align:center;}
-    .brand h1{font-size:1.1rem;}
-    .card{padding:18px;}
-  }
-  @media (prefers-reduced-motion: reduce){
-    *{animation:none !important; transition:none !important; scroll-behavior:auto !important;}
-  }
-</style>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <canvas id="confetti"></canvas>
@@ -267,7 +75,7 @@
     <p style="margin:0;">هەموو زمانێک کۆمەڵە دەنگێکی تایبەتی خۆی هەیە، بەهۆیانەوە وشە و ڕستە بەرهەمدهێنرێ، هەر یەک لەو دەنگانە بەپێی تایبەتمەندیی خۆیان ئەندامی ئاخاوتنی وەک: (زمان، لێو، قورگ،.....هتد) لەدرکاندنیاندا بەشداردەبن. ئەو دەنگانەی تایبەتن بە زمانی کوردی، بۆ هەر یەکەیان هێمایەک دانراوە، کە بە (پیت) ناودەبرێن، بۆ ئەوەی لە کاتی نووسیندا بناسرێنەوە، بۆ نموونە کاتێک دەنگی (ک) گۆدەکەین، تەنیا جۆرە ئاوازێکە و بە گوێ دەبیستین و هەستی پێدەکەین، بەڵام کە دەینووسین، وێنەیەکی بەرامبەر دانراوە.</p>
   </section>
 
-  <h2 style="text-align:center; color:var(--green-deep); font-size:1.3rem; margin:30px 0 18px;">بەشی ڕێزمان</h2>
+  <h2 class="section-title">بەشی ڕێزمان</h2>
 
   <section class="card" id="ex1">
     <div class="ex-head"><span class="num">١</span><h2>دەنگە بزوێن و نەبزوێنەکان دەربهێنە</h2></div>
@@ -351,6 +159,14 @@ function flash(el, ok){
   void el.offsetWidth;
   el.classList.add(ok ? 'pop' : 'shake');
 }
+function cheerSun(){
+  const sun = document.querySelector('.sun-badge');
+  if(!sun) return;
+  sun.classList.remove('cheer');
+  void sun.offsetWidth;
+  sun.classList.add('cheer');
+  setTimeout(()=>sun.classList.remove('cheer'), 700);
+}
 function updateProgress(){
   const pct = Math.round((mcqScore/MAX)*100);
   document.getElementById('progFill').style.width = pct + '%';
@@ -399,7 +215,7 @@ function answerMcq(btn, group, oi, q){
       o.disabled = true;
       if(i === q.correct) o.classList.add('ok');
     });
-    if(oi === q.correct){ mcqScore++; }
+    if(oi === q.correct){ mcqScore++; flash(btn,true); cheerSun(); }
     else { btn.classList.add('no'); flash(btn,false); }
   } else {
     buttons.forEach(o=>{ o.disabled = true; });
